@@ -1,0 +1,50 @@
+/* Basic styling for the chat window */
+.chat-window {
+    overflow-y: scroll;
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Input field styling */
+.input-field {
+    width: 80%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Button styling */
+button {
+    margin-top: 10px;
+}
+
+/* Chat window message styling */
+.chat-window div {
+    margin-bottom: 8px;
+}
+
+/* User and bot message differentiation */
+.chat-window .user {
+    font-weight: bold;
+}
+
+.chat-window .bot {
+    font-style: italic;
+}
+
+/* Optional: Add some space for the header */
+header {
+    padding: 15px;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header img {
+    margin-bottom: 10px;
+}
