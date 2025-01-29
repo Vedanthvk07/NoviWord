@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Word Chatbot Add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- Fluent UI for styling -->
+    <link rel="stylesheet" href="https://res-1.cdn.office.net/files/fabric-cdn-prod_20230815.002/office-ui-fabric-core/11.1.0/css/fabric.min.css"/>
+
+    <!-- Custom styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+    <header class="ms-welcome__header ms-bgColor-neutralLighter">
+        <img width="90" height="90" src="../../assets/logo-filled.png" alt="Word Chatbot" title="Word Chatbot" />
+        <h1 class="ms-font-su">Word Chatbot 1</h1>
+    </header>
+    <section id="sideload-msg" class="ms-welcome__main">
+        <h2 class="ms-font-xl">Interact with your document through chat!</h2>
+    </section>
+    <main id="app-body" class="ms-welcome__main" style="display: block;">
+        <!-- Chat window -->
+        <div id="chatWindow" class="chat-window">
+            <!-- Chat messages will appear here -->
+        </div>
+
+        <!-- User input for questions -->
+        <input type="text" id="userInput" class="input-field" placeholder="Ask a question" />
+
+        <!-- Buttons -->
+        <button id="askButton" class="ms-Button ms-Button--primary">Ask</button>
+        <button id="insertButton" class="ms-Button ms-Button--hero">Insert into Document</button>
+    </main>
+
+    <script type="text/javascript" src="taskpane.js"></script>
+</body>
+
+</html>
