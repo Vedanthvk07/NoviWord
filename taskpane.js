@@ -12,6 +12,18 @@ Office.onReady(function (info) {
       }
     };
 
+    document.getElementById("userInput").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        // Check if Enter key is pressed
+        event.preventDefault(); // Prevents the default behavior (like submitting a form)
+
+        const question = document.getElementById("userInput").value;
+        if (question) {
+          initializeDirectLine(question);
+        }
+      }
+    });
+
     // Handle the Insert button click
     document.getElementById("insertButton").onclick = async function () {
       const response = document.getElementById("chatWindow").lastChild
@@ -38,9 +50,9 @@ Office.onReady(function (info) {
 function displayChatMessage(question, response, role) {
   const chatWindow = document.getElementById("chatWindow");
   if (role === "bot") {
-    chatWindow.innerHTML += `<div class="bot">Bot:</div><div>${response}</div>`;
+    chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png"/> <br>${response}</div>`;
   } else {
-    chatWindow.innerHTML += `<div class="user">You:</div><div>${question}</div>`;
+    chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
   }
 
   document.getElementById("userInput").value = ""; // Clear input field
