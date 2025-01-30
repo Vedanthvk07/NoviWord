@@ -85,7 +85,9 @@ function displayChatMessage(question, response, role) {
     if (role === "bot") {
       chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png" alt="Copilot Icon" /> <br>${response.text}</div>`;
     } else {
-      chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
+      if (question !== "first") {
+        chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
+      }
     }
   }
 
@@ -134,7 +136,7 @@ const initializeDirectLine = async function () {
       console.log("Role*******", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Testing response: ", activity.text);
-        displayChatMessage(question, activity, activity.from.role);
+        displayChatMessage("first", activity, activity.from.role);
       }
     });
     return directLine;
