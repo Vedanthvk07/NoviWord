@@ -60,12 +60,11 @@ const initializeDirectLine = async function () {
     console.log("directLine*******", directLine);
     if (!directLine || !directLine.activity$) {
       throw new Error("DirectLine instance failed to initialize");
+    } else {
+      console.log("Directline initialized");
     }
     //const directLine = new DirectLine.DirectLine({ token: data.token });
     // directLine.current = new DirectLine({ token: data.token });
-    directLine.activity$.subscribe(() => {
-      console.log("Testing testing");
-    });
     directLine.activity$.subscribe((activity) => {
       console.log("Testing activity: ", activity);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
