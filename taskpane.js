@@ -2,9 +2,14 @@
 //Office.onReady(function (info) {
 //if (info.host === Office.HostType.Word) {
 let directLine1;
+let flag = true;
 document.addEventListener("DOMContentLoaded", async function () {
-  directLine1 = await initializeDirectLine();
-  console.log("init:", directLine1);
+  if (flag) {
+    directLine1 = await initializeDirectLine();
+    console.log("init:", directLine1);
+    flag = false;
+    console.log(flag);
+  }
 });
 
 document.getElementById("askButton").onclick = async function () {
