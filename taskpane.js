@@ -4,6 +4,7 @@
 let directLine1;
 window.onload = function () {
   directLine1 = initializeDirectLine();
+  console.log("init:", directLine1);
 };
 
 document.getElementById("askButton").onclick = async function () {
@@ -11,6 +12,7 @@ document.getElementById("askButton").onclick = async function () {
   if (question) {
     //const response =
     //await
+    console.log("calling:", directLine1);
     getBotResponse(directLine1, question);
     // displayChatMessage(question, response);
   }
@@ -142,6 +144,7 @@ const initializeDirectLine = async function () {
 };
 
 const getBotResponse = async function (directLine, question) {
+  console.log("In function:", directLine);
   directLine
     .postActivity({
       from: { id: "10", name: "User" },
