@@ -116,28 +116,28 @@ const initializeDirectLine = async function () {
 
     if (!directLine || !directLine.activity$) {
       throw new Error("DirectLine instance failed to initialize");
-    } else {
-      return directLine;
     }
-    //   directLine
-    //     .postActivity({
-    //       from: { id: "10", name: "User" },
-    //       type: "message",
-    //       text: question,
-    //     })
-    //     .subscribe(
-    //       (id) => console.log("Message sent with ID:", id),
-    //       (error) => console.error("Error sending message:", error)
-    //     );
 
-    //   directLine.activity$.subscribe((activity) => {
-    //     console.log("Testing activity: ", activity);
-    //     console.log("Role*******", activity.from.role);
-    //     if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-    //       console.log("Testing response: ", activity.text);
-    //       displayChatMessage(question, activity, activity.from.role);
-    //     }
-    //   });
+    directLine
+      .postActivity({
+        from: { id: "10", name: "User" },
+        type: "message",
+        text: "Hi",
+      })
+      .subscribe(
+        (id) => console.log("Message sent with ID:", id),
+        (error) => console.error("Error sending message:", error)
+      );
+
+    directLine.activity$.subscribe((activity) => {
+      console.log("Testing activity: ", activity);
+      console.log("Role*******", activity.from.role);
+      if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
+        console.log("Testing response: ", activity.text);
+        displayChatMessage(question, activity, activity.from.role);
+      }
+    });
+    return directLine;
   } catch (error) {
     console.error("Error initializing DirectLine:", error);
   }
