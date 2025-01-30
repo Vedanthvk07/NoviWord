@@ -5,8 +5,10 @@ Office.onReady(function (info) {
     document.getElementById("askButton").onclick = async function () {
       const question = document.getElementById("userInput").value;
       if (question) {
-        const response = await getChatbotResponse(question);
-        displayChatMessage(question, response);
+        //const response =
+        //await
+        initializeDirectLine(question);
+        // displayChatMessage(question, response);
       }
     };
 
@@ -23,20 +25,24 @@ Office.onReady(function (info) {
 });
 
 // Function to get the chatbot's response (simple hardcoded response or integrate with an API)
-async function getChatbotResponse(question) {
-  // For now, a simple mock response
-  console.log("Testing");
-  // Example Usage:
-  // fetchGeminiResponse("Tell me a fun fact about space.");
-  initializeDirectLine();
-  return "This is a response to: " + question;
-}
+// async function getChatbotResponse(question) {
+//   // For now, a simple mock response
+//   // console.log("Testing");
+//   // Example Usage:
+//   // fetchGeminiResponse("Tell me a fun fact about space.");
+//   initializeDirectLine(question);
+//   // return "This is a response to: " + question;
+// }
 
 // Display user question and bot response in chat window
-function displayChatMessage(question, response) {
+function displayChatMessage(question, response, role) {
   const chatWindow = document.getElementById("chatWindow");
-  chatWindow.innerHTML += `<div class="user">You:</div><div>${question}</div>`;
-  chatWindow.innerHTML += `<div class="bot">Bot:</div><div>${response}</div>`;
+  if (role === "bot") {
+    chatWindow.innerHTML += `<div class="bot">Bot:</div><div>${response}</div>`;
+  } else {
+    chatWindow.innerHTML += `<div class="user">You:</div><div>${question}</div>`;
+  }
+
   document.getElementById("userInput").value = ""; // Clear input field
 }
 
@@ -48,63 +54,42 @@ async function insertResponseIntoDocument(response) {
     await context.sync();
   });
 }
-const initializeDirectLine = async function () {
+const initializeDirectLine = async function (question) {
   try {
     const response = await fetch(
       "https://148a369decc3eeda85b913c1e80b9a.da.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cra27_agent123/directline/token?api-version=2022-03-01-preview"
     );
     const data = await response.json();
-    console.log("Testing data token:" + JSON.stringify(data, null, 2));
-    console.log("DirectLine Object:", window.DirectLine);
+    // console.log("Testing data token:" + JSON.stringify(data, null, 2));
+    // console.log("DirectLine Object:", window.DirectLine);
     const directLine = new window.DirectLine.DirectLine({ token: data.token });
-    console.log("directLine:", directLine);
+    // console.log("directLine*******", directLine);
+    // console.log("DirectLine instance:", directLine);
+    // console.log("DirectLine activity$:", directLine.activity$);
+
     if (!directLine || !directLine.activity$) {
       throw new Error("DirectLine instance failed to initialize");
-    } else {
-      console.log("Directline initialized");
     }
+    directLine
+      .postActivity({
+        from: { id: "10", name: "User" },
+        type: "message",
+        text: question,
+      })
+      .subscribe(
+        (id) => console.log("Message sent with ID:", id),
+        (error) => console.error("Error sending message:", error)
+      );
 
     directLine.activity$.subscribe((activity) => {
       console.log("Testing activity: ", activity);
+      console.log("Role*******", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Testing response: ", activity.text);
+        displayChatMessage(question, activity.text, activity.from.role);
       }
     });
   } catch (error) {
     console.error("Error initializing DirectLine:", error);
   }
 };
-console.log("Completed");
-
-// Call the function
-
-// async function fetchGeminiResponse(prompt) {
-//   console.log("Testing inside gemini");
-//   const apiKey = "AIzaSyB_ClqIjtTx2oL46vWfdKMFKUPB_YM3Ju8"; // Replace with your actual API key
-//   const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
-//   const requestBody = {
-//     prompt: { text: prompt },
-//     temperature: 0.7,
-//   };
-
-//   try {
-//     const response = await fetch(url, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(requestBody),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
-
-//     const data = await response.json();
-//     console.log("Gemini Response:", data);
-//     return data;
-//   } catch (error) {
-//     console.error("Error fetching Gemini response:", error);
-//   }
-// }
