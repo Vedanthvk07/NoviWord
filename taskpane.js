@@ -49,13 +49,42 @@ document.getElementById("insertButton").onclick = async function () {
 // Display user question and bot response in chat window
 function displayChatMessage(question, response, role) {
   const chatWindow = document.getElementById("chatWindow");
-  if (role === "bot") {
-    chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png"/> <br>${response}</div>`;
+
+  // Check if the response has attachments (like the sign-in button)
+  if (response.attachments && response.attachments.length > 0) {
+    response.attachments.forEach((attachment) => {
+      // Check if attachment has a 'buttons' array with a 'signin' button
+      if (attachment.content && attachment.content.buttons && attachment.content.buttons.length > 0) {
+        attachment.content.buttons.forEach((button) => {
+          if (button.type === "signin") {
+            // Create a sign-in button
+            const signinButton = document.createElement("button");
+            signinButton.innerText = button.title || "Sign In"; // Default title to "Sign In"
+            signinButton.classList.add("ms-Button", "ms-Button--primary");
+
+            // Open the sign-in URL when the button is clicked
+            signinButton.onclick = () => {
+              window.open(button.value, "_blank"); // Open the sign-in URL in a new tab
+            };
+
+            // Add the button to the chat window
+            chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png"/> <br>${attachment.content.text}</div>`;
+            chatWindow.appendChild(signinButton);
+          }
+        });
+      }
+    });
   } else {
-    chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
+    // Display regular message if no attachments
+    if (role === "bot") {
+      chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png"/> <br>${response.text}</div>`;
+    } else {
+      chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
+    }
   }
 
-  document.getElementById("userInput").value = ""; // Clear input field
+  // Clear the input field
+  document.getElementById("userInput").value = "";
 }
 
 // Function to insert the response into the Word document

@@ -54,3 +54,18 @@ header img {
     max-width: 20px;
     max-height: 20px;
 }
+
+/* Add styling for the sign-in button */
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #005a8b;
+  }
+  
