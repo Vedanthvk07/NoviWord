@@ -25,6 +25,10 @@ Office.onReady(function (info) {
 // Function to get the chatbot's response (simple hardcoded response or integrate with an API)
 async function getChatbotResponse(question) {
   // For now, a simple mock response
+  console.log("Testing");
+  // Example Usage:
+  // fetchGeminiResponse("Tell me a fun fact about space.");
+  initializeDirectLine();
   return "This is a response to: " + question;
 }
 
@@ -44,3 +48,64 @@ async function insertResponseIntoDocument(response) {
     await context.sync();
   });
 }
+const initializeDirectLine = async function () {
+  try {
+    const response = await fetch(
+      "https://148a369decc3eeda85b913c1e80b9a.da.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cra27_agent123/directline/token?api-version=2022-03-01-preview"
+    );
+    const data = await response.json();
+    console.log("Testing data token:" + JSON.stringify(data, null, 2));
+    console.log("DirectLine Object:", window.DirectLine);
+    const directLine = new window.DirectLine.DirectLine({ token: data.token });
+    console.log("directLine*******", directLine);
+    if (!directLine || !directLine.activity$) {
+      throw new Error("DirectLine instance failed to initialize");
+    }
+    //const directLine = new DirectLine.DirectLine({ token: data.token });
+    // directLine.current = new DirectLine({ token: data.token });
+    directLine.activity$.subscribe(() => {
+      console.log("Testing testing");
+    });
+    directLine.activity$.subscribe((activity) => {
+      console.log("Testing activity: ", activity);
+      if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
+        console.log("Testing response: ", activity.text);
+      }
+    });
+  } catch (error) {
+    console.error("Error initializing DirectLine:", error);
+  }
+};
+
+// Call the function
+
+// async function fetchGeminiResponse(prompt) {
+//   console.log("Testing inside gemini");
+//   const apiKey = "AIzaSyB_ClqIjtTx2oL46vWfdKMFKUPB_YM3Ju8"; // Replace with your actual API key
+//   const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+//   const requestBody = {
+//     prompt: { text: prompt },
+//     temperature: 0.7,
+//   };
+
+//   try {
+//     const response = await fetch(url, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(requestBody),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+//     console.log("Gemini Response:", data);
+//     return data;
+//   } catch (error) {
+//     console.error("Error fetching Gemini response:", error);
+//   }
+// }
