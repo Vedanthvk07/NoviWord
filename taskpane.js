@@ -127,7 +127,7 @@ const initializeDirectLine = async function (question) {
       console.log("Role*******", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Testing response: ", activity.text);
-        displayChatMessage(question, activity.text, activity.from.role);
+        displayChatMessage(question, activity, activity.from.role);
       }
     });
   } catch (error) {
