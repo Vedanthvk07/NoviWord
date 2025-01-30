@@ -57,14 +57,13 @@ const initializeDirectLine = async function () {
     console.log("Testing data token:" + JSON.stringify(data, null, 2));
     console.log("DirectLine Object:", window.DirectLine);
     const directLine = new window.DirectLine.DirectLine({ token: data.token });
-    console.log("directLine*******", directLine);
+    console.log("directLine:", directLine);
     if (!directLine || !directLine.activity$) {
       throw new Error("DirectLine instance failed to initialize");
     } else {
       console.log("Directline initialized");
     }
-    //const directLine = new DirectLine.DirectLine({ token: data.token });
-    // directLine.current = new DirectLine({ token: data.token });
+
     directLine.activity$.subscribe((activity) => {
       console.log("Testing activity: ", activity);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
@@ -75,6 +74,7 @@ const initializeDirectLine = async function () {
     console.error("Error initializing DirectLine:", error);
   }
 };
+console.log("Completed");
 
 // Call the function
 
