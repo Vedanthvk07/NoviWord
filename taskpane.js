@@ -1,40 +1,40 @@
 /* eslint-disable no-undef */
-Office.onReady(function (info) {
-  if (info.host === Office.HostType.Word) {
-    // Handle the Ask button click
-    document.getElementById("askButton").onclick = async function () {
-      const question = document.getElementById("userInput").value;
-      if (question) {
-        //const response =
-        //await
-        initializeDirectLine(question);
-        // displayChatMessage(question, response);
-      }
-    };
+//Office.onReady(function (info) {
+//if (info.host === Office.HostType.Word) {
+// Handle the Ask button click
+document.getElementById("askButton").onclick = async function () {
+  const question = document.getElementById("userInput").value;
+  if (question) {
+    //const response =
+    //await
+    initializeDirectLine(question);
+    // displayChatMessage(question, response);
+  }
+};
 
-    document.getElementById("userInput").addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        // Check if Enter key is pressed
-        event.preventDefault(); // Prevents the default behavior (like submitting a form)
+document.getElementById("userInput").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    // Check if Enter key is pressed
+    event.preventDefault(); // Prevents the default behavior (like submitting a form)
 
-        const question = document.getElementById("userInput").value;
-        if (question) {
-          initializeDirectLine(question);
-        }
-      }
-    });
-
-    // Handle the Insert button click
-    document.getElementById("insertButton").onclick = async function () {
-      const response = document.getElementById("chatWindow").lastChild
-        ? document.getElementById("chatWindow").lastChild.innerText
-        : "";
-      if (response) {
-        await insertResponseIntoDocument(response);
-      }
-    };
+    const question = document.getElementById("userInput").value;
+    if (question) {
+      initializeDirectLine(question);
+    }
   }
 });
+
+// Handle the Insert button click
+document.getElementById("insertButton").onclick = async function () {
+  const response = document.getElementById("chatWindow").lastChild
+    ? document.getElementById("chatWindow").lastChild.innerText
+    : "";
+  if (response) {
+    await insertResponseIntoDocument(response);
+  }
+};
+//}
+//});
 
 // Function to get the chatbot's response (simple hardcoded response or integrate with an API)
 // async function getChatbotResponse(question) {
@@ -69,7 +69,7 @@ async function insertResponseIntoDocument(response) {
 const initializeDirectLine = async function (question) {
   try {
     const response = await fetch(
-      "https://148a369decc3eeda85b913c1e80b9a.da.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cra27_agent123/directline/token?api-version=2022-03-01-preview"
+      "https://148a369decc3eeda85b913c1e80b9a.da.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cra27_copilotIWKE3Q/directline/token?api-version=2022-03-01-preview"
     );
     const data = await response.json();
     // console.log("Testing data token:" + JSON.stringify(data, null, 2));
