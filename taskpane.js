@@ -50,8 +50,8 @@ document.getElementById("insertButton").onclick = async function () {
 function displayChatMessage(question, response, role) {
   const chatWindow = document.getElementById("chatWindow");
 
-  // Check if the response contains attachments (like the sign-in button)
-  if (response.attachments && response.attachments.length > 0) {
+  // Check if response is valid and if attachments exist
+  if (response && response.attachments && response.attachments.length > 0) {
     response.attachments.forEach((attachment) => {
       // Check if attachment content has 'buttons' and 'signin' type
       if (attachment.content && attachment.content.buttons && attachment.content.buttons.length > 0) {
