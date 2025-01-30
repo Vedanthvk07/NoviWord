@@ -3,7 +3,7 @@
 //if (info.host === Office.HostType.Word) {
 let directLine1;
 document.addEventListener("DOMContentLoaded", async function () {
-  directLine1 = initializeDirectLine();
+  directLine1 = await initializeDirectLine();
   console.log("init:", directLine1);
 });
 
