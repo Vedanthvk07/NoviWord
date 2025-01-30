@@ -2,10 +2,10 @@
 //Office.onReady(function (info) {
 //if (info.host === Office.HostType.Word) {
 let directLine1;
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", async function () {
   directLine1 = initializeDirectLine();
   console.log("init:", directLine1);
-};
+});
 
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
