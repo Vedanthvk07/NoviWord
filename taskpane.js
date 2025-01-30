@@ -1,13 +1,17 @@
 /* eslint-disable no-undef */
 //Office.onReady(function (info) {
 //if (info.host === Office.HostType.Word) {
-// Handle the Ask button click
+let directLine1;
+window.onload = function () {
+  directLine1 = initializeDirectLine();
+};
+
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
     //const response =
     //await
-    initializeDirectLine(question);
+    getBotResponse(directLine1, question);
     // displayChatMessage(question, response);
   }
 };
@@ -19,7 +23,7 @@ document.getElementById("userInput").addEventListener("keydown", function (event
 
     const question = document.getElementById("userInput").value;
     if (question) {
-      initializeDirectLine(question);
+      getBotResponse(directLine1, question);
     }
   }
 });
@@ -95,7 +99,7 @@ async function insertResponseIntoDocument(response) {
     await context.sync();
   });
 }
-const initializeDirectLine = async function (question) {
+const initializeDirectLine = async function () {
   try {
     const response = await fetch(
       "https://148a369decc3eeda85b913c1e80b9a.da.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cra27_copilotIWKE3Q/directline/token?api-version=2022-03-01-preview"
@@ -110,27 +114,51 @@ const initializeDirectLine = async function (question) {
 
     if (!directLine || !directLine.activity$) {
       throw new Error("DirectLine instance failed to initialize");
+    } else {
+      return directLine;
     }
-    directLine
-      .postActivity({
-        from: { id: "10", name: "User" },
-        type: "message",
-        text: question,
-      })
-      .subscribe(
-        (id) => console.log("Message sent with ID:", id),
-        (error) => console.error("Error sending message:", error)
-      );
+    //   directLine
+    //     .postActivity({
+    //       from: { id: "10", name: "User" },
+    //       type: "message",
+    //       text: question,
+    //     })
+    //     .subscribe(
+    //       (id) => console.log("Message sent with ID:", id),
+    //       (error) => console.error("Error sending message:", error)
+    //     );
 
-    directLine.activity$.subscribe((activity) => {
-      console.log("Testing activity: ", activity);
-      console.log("Role*******", activity.from.role);
-      if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-        console.log("Testing response: ", activity.text);
-        displayChatMessage(question, activity, activity.from.role);
-      }
-    });
+    //   directLine.activity$.subscribe((activity) => {
+    //     console.log("Testing activity: ", activity);
+    //     console.log("Role*******", activity.from.role);
+    //     if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
+    //       console.log("Testing response: ", activity.text);
+    //       displayChatMessage(question, activity, activity.from.role);
+    //     }
+    //   });
   } catch (error) {
     console.error("Error initializing DirectLine:", error);
   }
+};
+
+const getBotResponse = async function (directLine, question) {
+  directLine
+    .postActivity({
+      from: { id: "10", name: "User" },
+      type: "message",
+      text: question,
+    })
+    .subscribe(
+      (id) => console.log("Message sent with ID:", id),
+      (error) => console.error("Error sending message:", error)
+    );
+
+  directLine.activity$.subscribe((activity) => {
+    console.log("Testing activity: ", activity);
+    console.log("Role*******", activity.from.role);
+    if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
+      console.log("Testing response: ", activity.text);
+      displayChatMessage(question, activity, activity.from.role);
+    }
+  });
 };
