@@ -50,10 +50,10 @@ document.getElementById("insertButton").onclick = async function () {
 function displayChatMessage(question, response, role) {
   const chatWindow = document.getElementById("chatWindow");
 
-  // Check if the response has attachments (like the sign-in button)
+  // Check if the response contains attachments (like the sign-in button)
   if (response.attachments && response.attachments.length > 0) {
     response.attachments.forEach((attachment) => {
-      // Check if attachment has a 'buttons' array with a 'signin' button
+      // Check if attachment content has 'buttons' and 'signin' type
       if (attachment.content && attachment.content.buttons && attachment.content.buttons.length > 0) {
         attachment.content.buttons.forEach((button) => {
           if (button.type === "signin") {
@@ -67,17 +67,17 @@ function displayChatMessage(question, response, role) {
               window.open(button.value, "_blank"); // Open the sign-in URL in a new tab
             };
 
-            // Add the button to the chat window
-            chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png"/> <br>${attachment.content.text}</div>`;
-            chatWindow.appendChild(signinButton);
+            // Display the bot's message
+            chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png" alt="Copilot Icon" /> <br>${attachment.content.text}</div>`;
+            chatWindow.appendChild(signinButton); // Add the button after the message
           }
         });
       }
     });
   } else {
-    // Display regular message if no attachments
+    // Regular message display if no attachments
     if (role === "bot") {
-      chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png"/> <br>${response.text}</div>`;
+      chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png" alt="Copilot Icon" /> <br>${response.text}</div>`;
     } else {
       chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
     }
