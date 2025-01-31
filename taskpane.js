@@ -4,6 +4,7 @@
 //if (info.host === Office.HostType.Word) {
 let directLine1=null;
 let flag = true;
+let subscribed=false;
 document.addEventListener("DOMContentLoaded", async function () {
   if (flag) {
     directLine1 = await initializeDirectLine();
@@ -166,7 +167,8 @@ const initializeDirectLine = async function () {
 
 const getBotResponse = async function (directLine, question) {
   console.log("In function:", directLine);
-  const response1= await directLine
+  if(!subscribed){
+  directLine
     .postActivity({
       from: { id: "10", name: "User" },
       type: "message",
@@ -175,15 +177,25 @@ const getBotResponse = async function (directLine, question) {
     .subscribe(
       (id) => console.log("Message sent with ID:", id),
       (error) => console.error("Error sending message:", error)
-    );
+    );}
+    else{
+     directLine
+    .postActivity({
+      from: { id: "10", name: "User" },
+      type: "message",
+      text: question,
+    })
+    }
    console.log(response1);
-  await directLine.activity$.subscribe((activity) => {
+
+  directLine.activity$.subscribe((activity) => {
     console.log("Testing activity: ", activity);
     console.log("Role*******", activity.from.role);
     if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
       console.log("Testing response in function: ", activity.text);
       displayChatMessage(question, activity, activity.from.role);
+      
     }
   });
-  directLine.activity$.unsubscribe();
+  //directLine.unsubscribe();
 };
