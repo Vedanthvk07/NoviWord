@@ -15,18 +15,19 @@
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Prevents scrolling of full container */
+    overflow-y: auto; 
+    max-height: 100%;/* Prevents scrolling of full container */
 }
 
 /* Chat window: The only scrollable section */
 .chat-window {
     flex-grow: 1;
-    overflow-y: auto; /* Enables scrolling */
+    overflow: hidden; /* Enables scrolling */
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 100%; /* Ensures it can scroll */
+    /* max-height: 100%;  Ensures it can scroll */ */
 }
 
 /* Input area: Fixed at the bottom */
