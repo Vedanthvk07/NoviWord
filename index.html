@@ -30,22 +30,19 @@
     <!-- <section id="sideload-msg" class="ms-welcome__main">
         <h2 class="ms-font-xl">Interact with your document through chat!</h2>
     </section> -->
-    <main id="app-body" class="ms-welcome__main" style="display: block;">
-        <!-- Chat window -->
-         <div class="chat-window-main">
+    <main id="app-body" class="ms-welcome__main">
+        <div class="chat-window-main">
             <div class="chat-container">
                 <div id="chatWindow" class="chat-window"></div>
-            </div>  
+            </div>
         </div>
-        <!-- <div id="chatWindow" class="chat-window">
-            <!-- Chat messages will appear here -->
-        <!-- </div>  -->
-        <!-- User input for questions -->
-        <input type="text" id="userInput" class="input-field" placeholder="Ask a question" />
- 
-        <!-- Buttons -->
-        <button id="askButton" class="ms-Button ms-Button--primary">Ask</button>
-        <button id="insertButton" class="ms-Button ms-Button--hero">Insert into Document</button>
+    
+        <!-- Fixed Input Area -->
+        <div class="input-area">
+            <input type="text" id="userInput" class="input-field" placeholder="Ask a question" />
+            <button id="askButton" class="ms-Button ms-Button--primary">Ask</button>
+            <button id="insertButton" class="ms-Button ms-Button--hero">Insert into Document</button>
+        </div>
     </main>
  
     <script type="text/javascript" src="taskpane.js"></script>
