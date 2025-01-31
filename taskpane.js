@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 //Office.onReady(function (info) {
 //if (info.host === Office.HostType.Word) {
@@ -18,19 +19,19 @@ document.getElementById("askButton").onclick = async function () {
     //const response =
     //await
     console.log("calling:", directLine1);
-    getBotResponse(directLine1, question);
+    await getBotResponse(directLine1, question);
     // displayChatMessage(question, response);
   }
 };
 
-document.getElementById("userInput").addEventListener("keydown", function (event) {
+document.getElementById("userInput").addEventListener("keydown", async function (event) {
   if (event.key === "Enter") {
     // Check if Enter key is pressed
     event.preventDefault(); // Prevents the default behavior (like submitting a form)
 
     const question = document.getElementById("userInput").value;
     if (question) {
-      getBotResponse(directLine1, question);
+      await getBotResponse(directLine1, question);
     }
   }
 });
@@ -140,7 +141,7 @@ const initializeDirectLine = async function () {
       console.log("Testing activity: ", activity);
       console.log("Role*******", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-        console.log("Testing response: ", activity.text);
+        console.log("Testing response in init: ", activity.text);
         displayChatMessage("first", activity, activity.from.role);
       }
     });
@@ -167,7 +168,7 @@ const getBotResponse = async function (directLine, question) {
     console.log("Testing activity: ", activity);
     console.log("Role*******", activity.from.role);
     if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-      console.log("Testing response: ", activity.text);
+      console.log("Testing response in function: ", activity.text);
       displayChatMessage(question, activity, activity.from.role);
     }
   });
