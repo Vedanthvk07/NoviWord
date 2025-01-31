@@ -90,10 +90,14 @@ function displayChatMessage(question, response, role) {
   } else {
     // Regular message display if no attachments
     if (role === "bot") {
+      if(response.text){
       chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png" alt="Copilot Icon" /> <br>${response.text}</div>`;
+      }
     } else {
+      if(question){
       
         chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
+      }
       
     }
   }
@@ -143,6 +147,7 @@ const initializeDirectLine = async function () {
       console.log("Role*******", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Testing response in init: ", activity.text);
+        displayChatMessage(false, activity, activity.from.role);
         
       }
     });
