@@ -1,9 +1,14 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
-Office.onReady(function (info) {
-if (info.host === Office.HostType.Word) {
 let directLine1=null;
 let flag = true;
+if (flag) {
+  directLine1 = await initializeDirectLine();
+  flag = false;
+}
+Office.onReady(function (info) {
+if (info.host === Office.HostType.Word) {
+
 document.addEventListener("DOMContentLoaded", async function () {
   if (flag) {
     directLine1 = await initializeDirectLine();
