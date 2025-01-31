@@ -139,26 +139,26 @@ const initializeDirectLine = async function () {
       throw new Error("DirectLine instance failed to initialize");
     }
 
-    // directLine
-    //   .postActivity({
-    //     from: { id: "10", name: "User" },
-    //     type: "message",
-    //     text: "Hi",
-    //   })
-    //   .subscribe(
-    //     (id) => console.log("Message sent with ID:", id),
-    //     (error) => console.error("Error sending message:", error)
-    //   );
+    directLine
+      .postActivity({
+        from: { id: "10", name: "User" },
+        type: "message",
+        text: "Hi",
+      })
+      .subscribe(
+        (id) => console.log("Message sent with ID:", id),
+        (error) => console.error("Error sending message:", error)
+      );
 
-    // directLine.activity$.subscribe((activity) => {
-    //   console.log("Testing activity: ", activity);
-    //   console.log("Role*******", activity.from.role);
-    //   if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-    //     console.log("Testing response in init: ", activity.text);
-    //     displayChatMessage(false, activity, activity.from.role);
+    directLine.activity$.subscribe((activity) => {
+      console.log("Testing activity: ", activity);
+      console.log("Role*******", activity.from.role);
+      if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
+        console.log("Testing response in init: ", activity.text);
+        displayChatMessage(false, activity, activity.from.role);
         
-    //   }
-    // });
+      }
+    });
     return directLine;
   } catch (error) {
     console.error("Error initializing DirectLine:", error);
@@ -183,24 +183,28 @@ const getBotResponse = async function (directLine, question) {
   console.log("new subscription")
 }
     else{
-     directLine
-    .postActivity({
-      from: { id: "10", name: "User" },
-      type: "message",
-      text: question,
-    });
+      directLine
+      .postActivity({
+        from: { id: "10", name: "User" },
+        type: "message",
+        text: question,
+      })
+      .subscribe(
+        (id) => console.log("Message sent with ID:", id),
+        (error) => console.error("Error sending message:", error)
+      );
     console.log("subscribed")
     }
    
 
-  directLine.activity$.subscribe((activity) => {
-    console.log("Testing activity: ", activity);
-    console.log("Role*******", activity.from.role);
-    if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-      console.log("Testing response in function: ", activity.text);
-      displayChatMessage(question, activity, activity.from.role);
+  // directLine.activity$.subscribe((activity) => {
+  //   console.log("Testing activity: ", activity);
+  //   console.log("Role*******", activity.from.role);
+  //   if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
+  //     console.log("Testing response in function: ", activity.text);
+  //     displayChatMessage(question, activity, activity.from.role);
       
-    }
-  });
+  //   }
+  // });
   //directLine.unsubscribe();
 };
