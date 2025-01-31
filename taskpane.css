@@ -130,3 +130,6 @@ header {
 .chat-window .bot {
     font-style: italic;
 }
+.mainbody{
+    overflow: hidden;
+}
