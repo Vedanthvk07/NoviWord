@@ -1,30 +1,20 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
-let directLine1=null;
-let flag = true;
-if (flag) {
-  directLine1 = await initializeDirectLine();
-  flag = false;
-}
+
 Office.onReady(function (info) {
 if (info.host === Office.HostType.Word) {
 
-document.addEventListener("DOMContentLoaded", async function () {
-  if (flag) {
-    directLine1 = await initializeDirectLine();
-    flag = false;
-  }
-});
 
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
     if(!directLine1){
-      directLine1 = await initializeDirectLine();
+     directLine1 = await initializeDirectLine();
     }
+    else{displayChatMessage(question, '', "User");
+      await getBotResponse(directLine1, question);}
     
-    displayChatMessage(question, '', "User");
-    await getBotResponse(directLine1, question);
+    
    
   }
 };
@@ -36,9 +26,15 @@ document.getElementById("userInput").addEventListener("keydown", async function 
 
     const question = document.getElementById("userInput").value;
     if (question) {
-      
-      displayChatMessage(question, '', "User");
+      if(!directLine1){
+        directLine1 = await initializeDirectLine();
+       }
+       else{
+        displayChatMessage(question, '', "User");
       await getBotResponse(directLine1, question);
+       }
+      
+      
     }
   }
 });
