@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 //Office.onReady(function (info) {
 //if (info.host === Office.HostType.Word) {
-let directLine1;
+let directLine1=null;
 let flag = true;
 document.addEventListener("DOMContentLoaded", async function () {
   if (flag) {
@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log("init:", directLine1);
     flag = false;
     console.log(flag);
+  }
+  else{
+    console.log("skipped init");
   }
 });
 
