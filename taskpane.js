@@ -3,8 +3,14 @@
 
 Office.onReady(function (info) {
 if (info.host === Office.HostType.Word) {
-
-let directLine1=null;
+  let flag=true;
+  let directLine1=null;
+  window.onload = async function () {
+    if (flag) {
+        console.log("Testing", flag);
+        directLine1 = await initializeDirectLine();
+        flag = false;
+    }}
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
