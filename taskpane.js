@@ -113,7 +113,7 @@ async function insertResponseIntoDocument(response) {
 const initializeDirectLine = async function () {
   try {
     const response = await fetch(
-      "https://148a369decc3eeda85b913c1e80b9a.da.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cra27_copilotIWKE3Q/directline/token?api-version=2022-03-01-preview"
+      "https://148a369decc3eeda85b913c1e80b9a.da.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cra27_agent123/directline/token?api-version=2022-03-01-preview"
     );
     const data = await response.json();
     // console.log("Testing data token:" + JSON.stringify(data, null, 2));
