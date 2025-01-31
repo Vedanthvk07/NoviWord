@@ -2,11 +2,10 @@
 /* eslint-disable no-undef */
 
 Office.onReady(async function (info) {
-  await displayStartingMessage("Hi, I am your word assistant bot-NoviWord");
-  directLine1 = await initializeDirectLine();
+  displayStartingMessage("Hi, I am your word assistant bot-NoviWord");
+  let directLine1 = await initializeDirectLine();
 if (info.host === Office.HostType.Word) {
   //let flag=true;
-  let directLine1=null;
   window.onload = async function () {
     // if (flag) {
     //     console.log("Testing", flag);
