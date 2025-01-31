@@ -1,17 +1,20 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 
-Office.onReady(function (info) {
+Office.onReady(async function (info) {
+  await displayChatMessage("", "Hi, I am your word assistant bot-NoviWord", "bot");
+  directLine1 = await initializeDirectLine();
 if (info.host === Office.HostType.Word) {
-  let flag=true;
+  //let flag=true;
   let directLine1=null;
   window.onload = async function () {
-    if (flag) {
-        console.log("Testing", flag);
-        await displayChatMessage("", "Hi, I am your word assistant bot-NoviWord", "bot");
-        directLine1 = await initializeDirectLine();
-        flag = false;
-    }}
+    // if (flag) {
+    //     console.log("Testing", flag);
+    //     await displayChatMessage("", "Hi, I am your word assistant bot-NoviWord", "bot");
+    //     directLine1 = await initializeDirectLine();
+    //     flag = false;
+    // }
+  }
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
