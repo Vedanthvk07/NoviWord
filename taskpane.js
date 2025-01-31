@@ -18,7 +18,7 @@ document.getElementById("askButton").onclick = async function () {
   if (question) {
     //const response =
     //await
-    console.log("calling:", directLine1);
+    console.log("mouxe click:", directLine1);
     await getBotResponse(directLine1, question);
     // displayChatMessage(question, response);
   }
@@ -31,6 +31,7 @@ document.getElementById("userInput").addEventListener("keydown", async function 
 
     const question = document.getElementById("userInput").value;
     if (question) {
+      console.log("enter:", directLine1);
       await getBotResponse(directLine1, question);
     }
   }
@@ -126,25 +127,25 @@ const initializeDirectLine = async function () {
       throw new Error("DirectLine instance failed to initialize");
     }
 
-    directLine
-      .postActivity({
-        from: { id: "10", name: "User" },
-        type: "message",
-        text: "Hi",
-      })
-      .subscribe(
-        (id) => console.log("Message sent with ID:", id),
-        (error) => console.error("Error sending message:", error)
-      );
+    // directLine
+    //   .postActivity({
+    //     from: { id: "10", name: "User" },
+    //     type: "message",
+    //     text: "Hi",
+    //   })
+    //   .subscribe(
+    //     (id) => console.log("Message sent with ID:", id),
+    //     (error) => console.error("Error sending message:", error)
+    //   );
 
-    directLine.activity$.subscribe((activity) => {
-      console.log("Testing activity: ", activity);
-      console.log("Role*******", activity.from.role);
-      if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-        console.log("Testing response in init: ", activity.text);
-        displayChatMessage("first", activity, activity.from.role);
-      }
-    });
+    // directLine.activity$.subscribe((activity) => {
+    //   console.log("Testing activity: ", activity);
+    //   console.log("Role*******", activity.from.role);
+    //   if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
+    //     console.log("Testing response in init: ", activity.text);
+    //     displayChatMessage("first", activity, activity.from.role);
+    //   }
+    // });
     return directLine;
   } catch (error) {
     console.error("Error initializing DirectLine:", error);
