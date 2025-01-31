@@ -19,6 +19,7 @@ document.getElementById("askButton").onclick = async function () {
     //const response =
     //await
     console.log("mouxe click:", directLine1);
+    displayChatMessage(question, '', "User");
     await getBotResponse(directLine1, question);
     // displayChatMessage(question, response);
   }
@@ -32,6 +33,7 @@ document.getElementById("userInput").addEventListener("keydown", async function 
     const question = document.getElementById("userInput").value;
     if (question) {
       console.log("enter:", directLine1);
+      displayChatMessage(question, '', "User");
       await getBotResponse(directLine1, question);
     }
   }
