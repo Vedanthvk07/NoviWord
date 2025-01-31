@@ -4,7 +4,7 @@
 Office.onReady(function (info) {
 if (info.host === Office.HostType.Word) {
 
-
+let directLine1=null;
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
