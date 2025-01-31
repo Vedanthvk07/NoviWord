@@ -168,6 +168,7 @@ const initializeDirectLine = async function () {
 const getBotResponse = async function (directLine, question) {
   console.log("In function:", directLine);
   if(!subscribed){
+
   directLine
     .postActivity({
       from: { id: "10", name: "User" },
@@ -177,14 +178,18 @@ const getBotResponse = async function (directLine, question) {
     .subscribe(
       (id) => console.log("Message sent with ID:", id),
       (error) => console.error("Error sending message:", error)
-    );}
+    );
+  subscribed=true;
+  console.log("new subscription")
+}
     else{
      directLine
     .postActivity({
       from: { id: "10", name: "User" },
       type: "message",
       text: question,
-    })
+    });
+    console.log("subscribed")
     }
    
 
