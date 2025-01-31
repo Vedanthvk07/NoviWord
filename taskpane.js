@@ -8,7 +8,6 @@ let subscribed=false;
 document.addEventListener("DOMContentLoaded", async function () {
   if (flag) {
     directLine1 = await initializeDirectLine();
-    await getBotResponse(directLine1, "Hi");
     console.log("init:", directLine1);
     flag = false;
     console.log(flag);
