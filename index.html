@@ -39,11 +39,16 @@
     
         <!-- Fixed Input Area -->
         <div class="input-area">
-            <input type="text" id="userInput" class="input-field" placeholder="Ask a question" />
-            <button id="askButton" class="ms-Button ms-Button--primary">Ask</button>
-            <button id="insertButton" class="ms-Button ms-Button--hero">Insert into Document</button>
+            <!-- First Row: Input field and Ask button -->
+            <div class="input-row">
+                <input type="text" id="userInput" class="input-field" placeholder="Ask a question" />
+                <button id="askButton" class="ms-Button ms-Button--primary">Ask</button>
+            </div>
+            <!-- Second Row: Insert into Document button -->
+            <button id="insertButton" class="ms-Button ms-Button--hero insert-button">Insert into Document</button>
         </div>
     </main>
+    
  
     <script type="text/javascript" src="taskpane.js"></script>
 </body>

@@ -2,60 +2,49 @@
 .ms-welcome__main {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Full height of the taskpane */
-    overflow: hidden; /* Prevents extra scrollbars */
+    height: 100vh; /* Full height of the task pane */
+    overflow: hidden; /* Prevents scrolling on the full container */
 }
 
-/* Chat window container should take available space */
+/* Chat window container */
 .chat-window-main {
-    flex-grow: 1; /* Allows expansion when header is hidden */
+    flex-grow: 1; /* Expands when header is hidden */
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     background: #fff;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Chat messages container (scrollable) */
+/* Chat window: The only scrollable section */
 .chat-window {
     flex-grow: 1;
-    overflow-y: auto;
+    overflow-y: auto; /* Enables scrolling */
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* Chat message styling */
-.chat-window div {
-    margin-bottom: 8px;
-}
-
-/* User and bot message alignment */
-.chat-window .user {
-    text-align: right;
-}
-
-.chat-window .bot {
-    text-align: left;
-    font-style: italic;
-}
-
-/* Fixed input and buttons container */
+/* Input area: Fixed at the bottom */
 .input-area {
-    position: sticky;
-    bottom: 0;
     background: white;
     padding: 10px;
     display: flex;
-    gap: 10px;
-    align-items: center;
+    flex-direction: column;
     border-top: 1px solid #ddd;
+    gap: 10px;
 }
 
-/* Ensure input field stretches */
+/* First row: Input field and "Ask" button */
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Input field should stretch */
 .input-field {
     flex-grow: 1;
     padding: 10px;
@@ -63,7 +52,7 @@
     border-radius: 5px;
 }
 
-/* Button styling */
+/* Buttons styling */
 button {
     padding: 10px;
     background-color: #0078d4;
@@ -71,10 +60,17 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    width: 100%; /* Ensures buttons take up full width in their row */
 }
 
+/* Button hover effect */
 button:hover {
     background-color: #005a8b;
+}
+
+/* Insert button should be on its own row */
+.insert-button {
+    width: 100%;
 }
 
 /* Header styling */
@@ -85,24 +81,14 @@ header {
     transition: 0.3s;
 }
 
-/* Header image and title */
-header img {
-    margin-bottom: 10px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-/* Expand chat window when header is hidden */
-.hidden-header .chat-window-main {
+/* When the header is hidden, the chat window expands automatically */
+#headerId:empty + .ms-welcome__main .chat-window-main {
     flex-grow: 1 !important;
 }
 
 /* User & bot message bubbles */
 .message {
-    max-width: 70%; /* Prevents messages from becoming too wide */
+    max-width: 70%;
     padding: 10px;
     border-radius: 12px;
     display: inline-block;
@@ -123,21 +109,65 @@ header h1 {
     align-self: flex-start;
 }
 
-/* User and bot wrapper for spacing */
+/* Additional Styling from Original CSS */
+
+/* User and bot messages alignment */
 .user-wrapper {
     font-weight: bold;
     display: flex;
-    justify-content: flex-end; /* Align user messages to the right */
+    justify-content: flex-end;
 }
 
 .bot-wrapper {
     font-weight: bold;
     display: flex;
-    justify-content: flex-start; /* Align bot messages to the left */
+    justify-content: flex-start;
 }
 
-/* Bot profile images */
+/* Chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Header image */
+header img {
+    margin-bottom: 10px;
+}
+
+/* Bot image inside chat */
 .bot img {
     max-width: 20px;
     max-height: 20px;
+}
+
+/* Chat message styling */
+.chat-window div {
+    margin-bottom: 8px;
+}
+
+/* User text alignment */
+.chat-window .user {
+    text-align: right;
+}
+
+/* Bot message styling */
+.chat-window .bot {
+    font-style: italic;
+}
+
+/* Optional: Makes buttons more visible */
+button {
+    font-size: 14px;
+}
+
+/* Fix for input and buttons positioning */
+.input-area {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    width: 100%;
 }
