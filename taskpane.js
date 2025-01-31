@@ -81,7 +81,7 @@ function displayChatMessage(question, response, role) {
             };
 
             // Display the bot's message
-            chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png" alt="Copilot Icon" /> <br>${attachment.content.text}</div>`;
+            chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${attachment.content.text}</div>`;
             chatWindow.appendChild(signinButton); // Add the button after the message
           }
         });
@@ -91,7 +91,7 @@ function displayChatMessage(question, response, role) {
     // Regular message display if no attachments
     if (role === "bot") {
       if(response.text){
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;      }
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;      }
     } else {
       if(question){
       
