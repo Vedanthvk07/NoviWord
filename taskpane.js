@@ -185,4 +185,5 @@ const getBotResponse = async function (directLine, question) {
       displayChatMessage(question, activity, activity.from.role);
     }
   });
+  directLine.activity$.unsubscribe();
 };
