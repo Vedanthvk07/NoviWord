@@ -94,6 +94,7 @@ function displayChatMessage(question, response, role) {
       chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png" alt="Copilot Icon" /> <br>${response.text}</div>`;
       }
     } else {
+      console.log(question);
       if(question){
       
         chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
