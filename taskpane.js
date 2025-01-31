@@ -186,7 +186,7 @@ const getBotResponse = async function (directLine, question) {
       text: question,
     })
     }
-   console.log(response1);
+   
 
   directLine.activity$.subscribe((activity) => {
     console.log("Testing activity: ", activity);
