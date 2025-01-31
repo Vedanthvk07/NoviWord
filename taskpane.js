@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
+    if(!directLine1){
+      directLine1 = await initializeDirectLine();
+    }
     
     displayChatMessage(question, '', "User");
     await getBotResponse(directLine1, question);
