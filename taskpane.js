@@ -6,18 +6,11 @@ Office.onReady(async function (info) {
   let directLine1 = await initializeDirectLine();
 if (info.host === Office.HostType.Word) {
   //let flag=true;
-  window.onload = async function () {
-    // if (flag) {
-    //     console.log("Testing", flag);
-    //     await displayChatMessage("", "Hi, I am your word assistant bot-NoviWord", "bot");
-    //     directLine1 = await initializeDirectLine();
-    //     flag = false;
-    // }
-  }
+  
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
-     
+    document.getElementById("headerId").style.display = "none";
     displayChatMessage(question, '', "User");
       await getBotResponse(directLine1, question);
     
@@ -32,7 +25,7 @@ document.getElementById("userInput").addEventListener("keydown", async function 
 
     const question = document.getElementById("userInput").value;
     if (question) {
-      
+      document.getElementById("headerId").style.display = "none";
         displayChatMessage(question, '', "User");
       await getBotResponse(directLine1, question);
       
