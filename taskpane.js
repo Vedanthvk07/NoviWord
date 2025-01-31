@@ -18,14 +18,11 @@ if (info.host === Office.HostType.Word) {
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
-    if(!directLine1){
-     directLine1 = await initializeDirectLine();
-    }
-    else{displayChatMessage(question, '', "User");
-      await getBotResponse(directLine1, question);}
+     
+    displayChatMessage(question, '', "User");
+      await getBotResponse(directLine1, question);
     
-    
-   
+
   }
 };
 
@@ -36,18 +33,12 @@ document.getElementById("userInput").addEventListener("keydown", async function 
 
     const question = document.getElementById("userInput").value;
     if (question) {
-      if(!directLine1){
-        directLine1 = await initializeDirectLine();
-       }
-       else{
+      
         displayChatMessage(question, '', "User");
       await getBotResponse(directLine1, question);
-       }
       
-      
-    }
   }
-});
+}});
 
 // Handle the Insert button click
 document.getElementById("insertButton").onclick = async function () {
