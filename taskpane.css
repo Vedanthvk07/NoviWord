@@ -8,13 +8,14 @@
 
 /* Chat window container */
 .chat-window-main {
-    flex-grow: 1; /* Expands when header is hidden */
+    flex-grow: 1; /* Allows it to grow when header is hidden */
     display: flex;
     flex-direction: column;
     background: #fff;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevents scrolling of full container */
 }
 
 /* Chat window: The only scrollable section */
@@ -25,6 +26,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 100%; /* Ensures it can scroll */
 }
 
 /* Input area: Fixed at the bottom */
@@ -35,6 +37,9 @@
     flex-direction: column;
     border-top: 1px solid #ddd;
     gap: 10px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
 }
 
 /* First row: Input field and "Ask" button */
@@ -60,7 +65,6 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    width: 100%; /* Ensures buttons take up full width in their row */
 }
 
 /* Button hover effect */
@@ -107,67 +111,4 @@ header {
     background-color: #e0e0e0;
     color: black;
     align-self: flex-start;
-}
-
-/* Additional Styling from Original CSS */
-
-/* User and bot messages alignment */
-.user-wrapper {
-    font-weight: bold;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.bot-wrapper {
-    font-weight: bold;
-    display: flex;
-    justify-content: flex-start;
-}
-
-/* Chat container */
-.chat-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Header image */
-header img {
-    margin-bottom: 10px;
-}
-
-/* Bot image inside chat */
-.bot img {
-    max-width: 20px;
-    max-height: 20px;
-}
-
-/* Chat message styling */
-.chat-window div {
-    margin-bottom: 8px;
-}
-
-/* User text alignment */
-.chat-window .user {
-    text-align: right;
-}
-
-/* Bot message styling */
-.chat-window .bot {
-    font-style: italic;
-}
-
-/* Optional: Makes buttons more visible */
-button {
-    font-size: 14px;
-}
-
-/* Fix for input and buttons positioning */
-.input-area {
-    position: sticky;
-    bottom: 0;
-    background: white;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    width: 100%;
 }
