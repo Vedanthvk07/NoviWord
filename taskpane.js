@@ -154,7 +154,7 @@ const initializeDirectLine = async function () {
 
 const getBotResponse = async function (directLine, question) {
   console.log("In function:", directLine);
-  directLine
+  await directLine
     .postActivity({
       from: { id: "10", name: "User" },
       type: "message",
@@ -165,7 +165,7 @@ const getBotResponse = async function (directLine, question) {
       (error) => console.error("Error sending message:", error)
     );
 
-  directLine.current.activity$.subscribe((activity) => {
+  await directLine.current.activity$.subscribe((activity) => {
     console.log("Testing activity: ", activity);
     console.log("Role*******", activity.from.role);
     if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
