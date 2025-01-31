@@ -8,6 +8,7 @@ if (info.host === Office.HostType.Word) {
   window.onload = async function () {
     if (flag) {
         console.log("Testing", flag);
+        await displayChatMessage("", "Hi, I am your word assistant bot-NoviWord", "bot");
         directLine1 = await initializeDirectLine();
         flag = false;
     }}
