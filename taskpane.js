@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 Office.onReady(async function (info) {
-  await displayChatMessage("", "Hi, I am your word assistant bot-NoviWord", "bot");
+  await displayStartingMessage("Hi, I am your word assistant bot-NoviWord");
   directLine1 = await initializeDirectLine();
 if (info.host === Office.HostType.Word) {
   //let flag=true;
@@ -61,7 +61,10 @@ document.getElementById("insertButton").onclick = async function () {
 }
 });
 
-
+function displayStartingMessage(starter) {
+  const chatWindow = document.getElementById("chatWindow");
+  chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${starter}</div>`;      
+}
 // Display user question and bot response in chat window
 function displayChatMessage(question, response, role) {
   const chatWindow = document.getElementById("chatWindow");
