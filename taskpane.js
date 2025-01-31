@@ -1,31 +1,23 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
-//Office.onReady(function (info) {
-//if (info.host === Office.HostType.Word) {
+Office.onReady(function (info) {
+if (info.host === Office.HostType.Word) {
 let directLine1=null;
 let flag = true;
-let subscribed=false;
 document.addEventListener("DOMContentLoaded", async function () {
   if (flag) {
     directLine1 = await initializeDirectLine();
-    console.log("init:", directLine1);
     flag = false;
-    console.log(flag);
-  }
-  else{
-    console.log("skipped init");
   }
 });
 
 document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
-    //const response =
-    //await
-    console.log("mouxe click:", directLine1);
+    
     displayChatMessage(question, '', "User");
     await getBotResponse(directLine1, question);
-    // displayChatMessage(question, response);
+   
   }
 };
 
@@ -36,7 +28,7 @@ document.getElementById("userInput").addEventListener("keydown", async function 
 
     const question = document.getElementById("userInput").value;
     if (question) {
-      console.log("enter:", directLine1);
+      
       displayChatMessage(question, '', "User");
       await getBotResponse(directLine1, question);
     }
@@ -52,18 +44,9 @@ document.getElementById("insertButton").onclick = async function () {
     await insertResponseIntoDocument(response);
   }
 };
-//}
-//});
+}
+});
 
-// Function to get the chatbot's response (simple hardcoded response or integrate with an API)
-// async function getChatbotResponse(question) {
-//   // For now, a simple mock response
-//   // console.log("Testing");
-//   // Example Usage:
-//   // fetchGeminiResponse("Tell me a fun fact about space.");
-//   initializeDirectLine(question);
-//   // return "This is a response to: " + question;
-// }
 
 // Display user question and bot response in chat window
 function displayChatMessage(question, response, role) {
@@ -97,14 +80,11 @@ function displayChatMessage(question, response, role) {
     // Regular message display if no attachments
     if (role === "bot") {
       if(response.text){
-      chatWindow.innerHTML += `<div class="bot"><img src="assets/copilot.png" alt="Copilot Icon" /> <br>${response.text}</div>`;
-      }
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;      }
     } else {
-      console.log(question);
       if(question){
       
-        chatWindow.innerHTML += `<div class="user">You<br>${question}</div>`;
-      }
+        chatWindow.innerHTML += `<div class="user-wrapper">You</div><div class="message user">${question}</div>`;      }
       
     }
   }
@@ -124,15 +104,12 @@ async function insertResponseIntoDocument(response) {
 const initializeDirectLine = async function () {
   try {
     const response = await fetch(
-      "https://148a369decc3eeda85b913c1e80b9a.da.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cra27_agent123/directline/token?api-version=2022-03-01-preview"
+      ""
     );
     const data = await response.json();
-    // console.log("Testing data token:" + JSON.stringify(data, null, 2));
-    // console.log("DirectLine Object:", window.DirectLine);
+    
     const directLine = new window.DirectLine.DirectLine({ token: data.token });
-    // console.log("directLine*******", directLine);
-    // console.log("DirectLine instance:", directLine);
-    // console.log("DirectLine activity$:", directLine.activity$);
+    
 
     if (!directLine || !directLine.activity$) {
       throw new Error("DirectLine instance failed to initialize");
@@ -151,9 +128,9 @@ const initializeDirectLine = async function () {
 
     directLine.activity$.subscribe((activity) => {
       console.log("Testing activity: ", activity);
-      console.log("Role*******", activity.from.role);
+      console.log("Role", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-        console.log("Testing response in init: ", activity.text);
+        console.log("Bot Response: ", activity.text);
         displayChatMessage(false, activity, activity.from.role);
         
       }
@@ -165,45 +142,15 @@ const initializeDirectLine = async function () {
 };
 
 const getBotResponse = async function (directLine, question) {
-  console.log("In function:", directLine);
-  if(!subscribed){
-
   directLine
     .postActivity({
       from: { id: "10", name: "User" },
       type: "message",
       text: question,
     })
-    .subscribe(
+    .subscribe(             // calls the subscription already created in InitializeDirectline method
       (id) => console.log("Message sent with ID:", id),
       (error) => console.error("Error sending message:", error)
     );
-  subscribed=true;
-  console.log("new subscription")
+  
 }
-    else{
-      directLine
-      .postActivity({
-        from: { id: "10", name: "User" },
-        type: "message",
-        text: question,
-      })
-      .subscribe(
-        (id) => console.log("Message sent with ID:", id),
-        (error) => console.error("Error sending message:", error)
-      );
-    console.log("subscribed")
-    }
-   
-
-  // directLine.activity$.subscribe((activity) => {
-  //   console.log("Testing activity: ", activity);
-  //   console.log("Role*******", activity.from.role);
-  //   if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
-  //     console.log("Testing response in function: ", activity.text);
-  //     displayChatMessage(question, activity, activity.from.role);
-      
-  //   }
-  // });
-  //directLine.unsubscribe();
-};
