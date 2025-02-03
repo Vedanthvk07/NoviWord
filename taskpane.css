@@ -1,107 +1,98 @@
-/* Ensure the main container fills the task pane */
-.ms-welcome__main {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* Full height of the task pane */
-    overflow: hidden; /* Prevents scrolling on the full container */
-}
-
-/* Chat window container */
-.chat-window-main {
-    flex-grow: 1; /* Allows it to grow when header is hidden */
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    overflow-y: scroll; 
-    max-height: 100%;/* Prevents scrolling of full container */
-}
-
-/* Chat window: The only scrollable section */
+/* Basic styling for the chat window */
 .chat-window {
-    flex-grow: 1;
-    overflow: hidden; /* Enables scrolling */
+    /* overflow-y: scroll; */
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* Hide scrollbar in Edge/IE */
+    scrollbar-width: none;  /* Hide scrollbar in Firefox */
+    height: 300px;
+    /* border: 1px solid #ccc; */
     padding: 10px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    /* max-height: 100%;  Ensures it can scroll */ 
 }
-
-/* Input area: Fixed at the bottom */
-.input-area {
-    background: white;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid #ddd;
-    gap: 10px;
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    max-height: 100px;
+.chat-window::-webkit-scrollbar {
+    display: none;  /* Hide scrollbar in Chrome, Safari */
 }
-
-/* First row: Input field and "Ask" button */
-.input-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* Input field should stretch */
+/* Input field styling */
 .input-field {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: 80%;
+    padding: 5px;
+    margin-bottom: 10px;
 }
-
-/* Buttons styling */
+ 
+/* Button styling */
 button {
-    padding: 10px;
-    background-color:lightblue;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+    margin-top: 10px;
 }
-
-/* Button hover effect */
-button:hover {
-    background-color: #005a8b;
+ 
+/* Chat window message styling */
+.chat-window div {
+    margin-bottom: 8px;
 }
-
-/* Insert button should be on its own row */
-.insert-button {
-    width: 100%;
+ 
+/* User and bot message differentiation */
+.chat-window .user {
+    text-align: right;
 }
-
-/* Header styling */
+ 
+.chat-window .bot {
+    font-style: italic;
+}
+ 
+/* Optional: Add some space for the header */
 header {
     padding: 15px;
     background-color: #f4f4f4;
     text-align: center;
-    transition: 0.3s;
 }
-
-/* When the header is hidden, the chat window expands automatically */
-#headerId:empty + .ms-welcome__main .chat-window-main {
-    flex-grow: 1 !important;
+ 
+header h1 {
+    margin: 0;
+    font-size: 24px;
 }
-
-/* User & bot message bubbles */
-.message {
-    max-width: 70%;
+ 
+header img {
+    margin-bottom: 10px;
+}
+.bot img {
+    max-width: 20px;
+    max-height: 20px;
+}
+ 
+.chat-window-main {
+    margin: auto;
+    background: #fff;
     padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+ 
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.user-wrapper {
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end; /* Align user message to the right */
+}
+ 
+.bot-wrapper {
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start; /* Align bot message to the left */
+}
+.message {
+    max-width: 70%; /* Prevents divs from becoming too wide */
+    padding: 10px;
+    margin: 5px 0;
     border-radius: 12px;
     display: inline-block;
     word-wrap: break-word;
 }
-
-
+ 
 .user {
     background-color: #3498db;
     color: white;
@@ -113,24 +104,17 @@ header {
     color: black;
     align-self: flex-start;
 }
-
-.bot-wrapper {
-    font-weight: bold;
-    display: flex;
-    justify-content: flex-start; /* Align bot message to the left */
-}
-.user-wrapper {
-    font-weight: bold;
-    display: flex;
-    justify-content: flex-end; /* Align user message to the right */
-}
-.chat-window .user {
-    text-align: right;
-}
  
-.chat-window .bot {
-    font-style: italic;
-}
-.mainbody{
-    overflow: hidden;
-}
+ button {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+ 
+  button:hover {
+    background-color: #005a8b;
+  }

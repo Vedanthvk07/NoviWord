@@ -25,7 +25,7 @@ document.getElementById("userInput").addEventListener("keydown", async function 
 
     const question = document.getElementById("userInput").value;
     if (question) {
-      document.getElementById("headerId").style.display = "none";
+      //document.getElementById("headerId").style.display = "none";
         displayChatMessage(question, '', "User");
       await getBotResponse(directLine1, question);
       
@@ -79,7 +79,11 @@ function displayChatMessage(question, response, role) {
   } else {
     // Regular message display if no attachments
     if (role === "bot") {
-      if(response.text){
+      if(response.speak==="generate"){
+        insertResponseIntoDocument(response.text);
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">SOW content generated in document</div>`; 
+      }
+      else if(response.text){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;      }
     } else {
       if(question){
@@ -88,7 +92,7 @@ function displayChatMessage(question, response, role) {
       
     }
   }
-
+  scrollToBottom();
   // Clear the input field
   document.getElementById("userInput").value = "";
 }
@@ -153,4 +157,10 @@ const getBotResponse = async function (directLine, question) {
       (error) => console.error("Error sending message:", error)
     );
   
+}
+function scrollToBottom() {
+  const chatWindow = document.getElementById("chatWindow");
+  setTimeout(() => {
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }, 100); // Timeout ensures scroll happens after the new message is rendered
 }
