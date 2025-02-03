@@ -101,7 +101,7 @@ function displayChatMessage(question, response, role) {
 async function insertResponseIntoDocument(response) {
   await Word.run(async (context) => {
     const body = context.document.body;
-    body.insertText(response, Word.InsertLocation.end);
+    body.insertHtml(response, Word.InsertLocation.end);
     await context.sync();
   });
 }
