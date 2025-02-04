@@ -231,3 +231,61 @@ async function getSelectedText(directLine) {
 });
   
 }
+
+let recognition = null;
+ 
+document.getElementById("speakButton").addEventListener("click", async () => {
+ 
+  try {
+    await navigator.mediaDevices.getUserMedia({ audio: true });
+    document.getElementById("output").innerText = "Listening...";
+    console.log("Microphone access granted.");
+    startVoiceInput();
+  } catch (error) {
+    console.error("Microphone access denied:", error);
+  }
+});
+ 
+function startVoiceInput() {
+  // If a recognition instance already exists, stop it before starting a new one
+  if (recognition && recognition.abort) {
+    recognition.abort(); // This will stop the ongoing recognition session
+  }
+ 
+  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  recognition.continuous = true;
+ 
+  // recognition.start();
+   // trying continuos
+  recognition.onstart = function () {
+    console.log("Speech recognition started.");
+  };
+   // trying continuos
+  recognition.onresult = function (event) {
+    const transcript = event.results[0][0].transcript;
+    console.log("Recognized text:", transcript);
+    // insertTextIntoWord(transcript);
+    document.getElementById("userInput").value = transcript;
+    document.getElementById("output").innerText = transcript
+  };
+ 
+  recognition.onerror = function (event) {
+    console.error("Speech recognition error:", event.error);
+     // trying continuos
+    if (event.error === 'aborted') {
+      console.log("Restarting recognition...");
+      recognition.start();
+    }
+     // trying continuos
+  };
+  // trying continuos
+  recognition.onend = function () {
+    console.log("Speech recognition ended.");
+  };
+ 
+  recognition.start();
+  //  // trying continuos
+}
