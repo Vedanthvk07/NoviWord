@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 
+const { split } = require("core-js/fn/symbol");
+
 Office.onReady(async function (info) {
   displayStartingMessage("Hi, I am your word assistant bot-NoviWord");
   let directLine1 = await initializeDirectLine();
@@ -93,14 +95,28 @@ function displayChatMessage(question, response, role) {
     // Regular message display if no attachments
     if (role === "bot") {
       if(response.speak==="Generate"){
+
         insertResponseIntoDocument(response.text);
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">SOW content generated in document</div>`; 
+      
       }else if(response.speak==="Table"){
+
         insertResponseIntoDocumentAtCursor(response.text);
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table generated in document</div>`;      }
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table generated in document</div>`;      
+      
+      }
+      else if(response.speak==="Replace"){
+        textArray=split(response.text,"|");
+        replaceText(textArray[0],textArray[1]);
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Replaced ${textArray[0]} with ${textArray[1]} </div>`;      
+      }else if(response.speak==="Selected"){
+        getSelectedText();  
+      }
     
       else if(response.text){
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;      }
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;      
+      }
+      
     } 
     else {
       if(question){
@@ -188,4 +204,29 @@ function scrollToBottom() {
   setTimeout(() => {
     chatWindow.scrollTop = chatWindow.scrollHeight;
   }, 100); // Timeout ensures scroll happens after the new message is rendered
+}
+
+async function replaceText(oldText,NewText){
+  await Word.run(async (context) => {
+    let results = context.document.body.search(oldText);
+    results.load();
+    await context.sync();
+    
+    results.items.forEach(item => {
+        item.insertText(NewText, Word.InsertLocation.replace);
+    });
+    
+    await context.sync();
+});
+}
+
+async function getSelectedText() {
+  await Word.run(async (context) => {
+    let range = context.document.getSelection();
+    range.load("text");
+    await context.sync();
+    SelText=range.text;
+    await getBotResponse(directLine1, SelText);
+});
+  
 }
