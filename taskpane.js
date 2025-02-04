@@ -244,6 +244,34 @@ document.getElementById("speakButton").addEventListener("click", async () => {
   } catch (error) {
     console.error("Microphone access denied:", error);
   }
+  // Request permission from a user to access their camera and microphone.
+if (Office.context.platform === Office.PlatformType.OfficeOnline) {
+  const deviceCapabilities = [
+      Office.DevicePermissionType.camera,
+      Office.DevicePermissionType.microphone
+  ];
+  Office.devicePermission
+      .requestPermissions(deviceCapabilities)
+      .then((isGranted) => {
+          if (isGranted) {
+              console.log("Permission granted.");
+              // Reload your add-in before you run code that uses the device capabilities.
+              location.reload();
+          } else {
+              console.log("Permission has been previously granted and is already set in the iframe.");
+
+              // Since permission has been previously granted, you don't need to reload your add-in.
+
+              // Do something with the device capabilities.
+          }
+      })
+      .catch((error) => {
+          console.log("Permission denied.");
+          console.error(error);
+
+          // Do something when permission is denied.
+      });
+}
 });
  
 function startVoiceInput() {
