@@ -92,7 +92,7 @@ function displayChatMessage(question, response, role) {
     // Regular message display if no attachments
     if (role === "bot") {
       if(response.speak==="Generate"){
-        insertResponseIntoDocument(response.text);
+        insertResponseIntoDocumentAtCursor(response.text);
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">SOW content generated in document</div>`; 
       }
       else if(response.text){
@@ -114,6 +114,14 @@ async function insertResponseIntoDocument(response) {
   await Word.run(async (context) => {
     const body = context.document.body;
     body.insertHtml(response, Word.InsertLocation.end);
+    await context.sync();
+  });
+}
+
+async function insertResponseIntoDocumentAtCursor(response) {
+  await Word.run(async (context) => {
+    const body = context.document.body;
+    body.insertHtml(response, Word.InsertLocation.after);
     await context.sync();
   });
 }
