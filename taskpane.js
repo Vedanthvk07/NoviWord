@@ -46,7 +46,17 @@ document.getElementById("insertButton").onclick = async function () {
 
 function displayStartingMessage(starter) {
   const chatWindow = document.getElementById("chatWindow");
-  chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${starter}</div>`;      
+  chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${starter}</div>`; 
+   getDocProperties();    
+}
+
+async function getDocProperties() {
+  let docProperties = context.document.properties;
+    docProperties.load("title");
+    
+    await context.sync();
+    console.log("Document Name: " + docProperties.title);
+  
 }
 // Display user question and bot response in chat window
 function displayChatMessage(question, response, role) {
