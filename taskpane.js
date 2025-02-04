@@ -51,12 +51,13 @@ function displayStartingMessage(starter) {
 }
 
 async function getDocProperties() {
+  await Word.run(async (context) => {
   let docProperties = context.document.properties;
     docProperties.load("title");
     
     await context.sync();
     console.log("Document Name: " + docProperties.title);
-  
+  });
 }
 // Display user question and bot response in chat window
 function displayChatMessage(question, response, role) {
