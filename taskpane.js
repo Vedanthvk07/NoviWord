@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 
-const { split } = require("core-js/fn/symbol");
+//const { split } = require("core-js/fn/symbol");
 
 Office.onReady(async function (info) {
   displayStartingMessage("Hi, I am your word assistant bot-NoviWord");
@@ -49,19 +49,19 @@ document.getElementById("insertButton").onclick = async function () {
 function displayStartingMessage(starter) {
   const chatWindow = document.getElementById("chatWindow");
   chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${starter}</div>`; 
-   getDocProperties();    
+  // getDocProperties();    
 }
 
-async function getDocProperties() {
-  await Word.run(async (context) => {
-  let docProperties = context.document.properties;
-    docProperties.load("title");
+// async function getDocProperties() {
+//   await Word.run(async (context) => {
+//   let docProperties = context.document.properties;
+//     docProperties.load("title");
     
-    await context.sync();
-    console.log("Document Name: ", docProperties.title);
-    console.log("Document props: ", docProperties);
-  });
-}
+//     await context.sync();
+//     console.log("Document Name: ", docProperties.title);
+//     console.log("Document props: ", docProperties);
+//   });
+// }
 // Display user question and bot response in chat window
 function displayChatMessage(question, response, role) {
   const chatWindow = document.getElementById("chatWindow");
@@ -106,7 +106,8 @@ function displayChatMessage(question, response, role) {
       
       }
       else if(response.speak==="Replace"){
-        textArray=split(response.text,"|");
+        splitText=response.text
+        textArray=splitText.split("|");
         replaceText(textArray[0],textArray[1]);
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Replaced ${textArray[0]} with ${textArray[1]} </div>`;      
       }else if(response.speak==="Selected"){
