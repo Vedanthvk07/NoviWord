@@ -13,7 +13,7 @@ document.getElementById("askButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
     document.getElementById("headerId").style.display = "none";
-    displayChatMessage(question, '', "User");
+    displayChatMessage(question, '', "User",directLine1);
       await getBotResponse(directLine1, question);
     
 
@@ -28,7 +28,7 @@ document.getElementById("userInput").addEventListener("keydown", async function 
     const question = document.getElementById("userInput").value;
     if (question) {
       //document.getElementById("headerId").style.display = "none";
-        displayChatMessage(question, '', "User");
+        displayChatMessage(question, '', "User",directLine1);
       await getBotResponse(directLine1, question);
       
   }
@@ -63,7 +63,7 @@ function displayStartingMessage(starter) {
 //   });
 // }
 // Display user question and bot response in chat window
-function displayChatMessage(question, response, role) {
+function displayChatMessage(question, response, role,directLine) {
   const chatWindow = document.getElementById("chatWindow");
 
   // Check if response is valid and if attachments exist
@@ -111,7 +111,7 @@ function displayChatMessage(question, response, role) {
         replaceText(textArray[0],textArray[1]);
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Replaced ${textArray[0]} with ${textArray[1]} </div>`;      
       }else if(response.speak==="Selected"){
-        getSelectedText();  
+        getSelectedText(directLine);  
       }
     
       else if(response.text){
@@ -177,7 +177,7 @@ const initializeDirectLine = async function () {
       console.log("Role", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Bot Response: ", activity.text);
-        displayChatMessage(false, activity, activity.from.role);
+        displayChatMessage(false, activity, activity.from.role,directLine);
         
       }
     });
@@ -221,13 +221,13 @@ async function replaceText(oldText,NewText){
 });
 }
 
-async function getSelectedText() {
+async function getSelectedText(directLine) {
   await Word.run(async (context) => {
     let range = context.document.getSelection();
     range.load("text");
     await context.sync();
     SelText=range.text;
-    await getBotResponse(directLine1, SelText);
+    await getBotResponse(directLine, SelText);
 });
   
 }
