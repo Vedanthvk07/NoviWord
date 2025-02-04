@@ -43,11 +43,28 @@
         <!-- Buttons -->
         <button id="askButton" class="ms-Button ms-Button--primary">Ask</button>
         <button id="insertButton" class="ms-Button ms-Button--hero">Insert into document</button>
-        <button id="speakButton">Voice In</button>
-        <p id="output">Your speech will appear here...</p>
+        <button id="startSpeechButton">Voice In</button>
+        
  
     </main>
+    <script>
+        document.getElementById('startSpeechButton').addEventListener('click', function () {
+            // Open a pop-up window
+            const popup = window.open('speech.html', 'SpeechRecognition', 'width=400,height=300');
  
+            // Listen for messages from the pop-up window
+            window.addEventListener("message", function (event) {
+                if (event.origin !== window.location.origin) return; // Security check
+ 
+                // Get the recognized text from the pop-up
+                const transcript = event.data;
+ 
+                // Insert recognized text into Word document
+                console.log(transcript);
+                document.getElementById("userInput").value = transcript;
+            });
+        });
+    </script>
     <script type="text/javascript" src="taskpane.js"></script>
 </body>
  
