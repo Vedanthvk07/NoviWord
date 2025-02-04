@@ -65,7 +65,8 @@ function displayChatMessage(question, response, role) {
   const chatWindow = document.getElementById("chatWindow");
 
   // Check if response is valid and if attachments exist
-  if (response && response.attachments && response.attachments.length > 0) {
+  // eslint-disable-next-line no-constant-condition
+  if (response && response.attachments && response.attachments.length > 0 && false) {
     response.attachments.forEach((attachment) => {
       // Check if attachment content has 'buttons' and 'signin' type
       if (attachment.content && attachment.content.buttons && attachment.content.buttons.length > 0) {
@@ -155,7 +156,7 @@ const initializeDirectLine = async function () {
       console.log("Role", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Bot Response: ", activity.text);
-        //displayChatMessage(false, activity, activity.from.role);
+        displayChatMessage(false, activity, activity.from.role);
         
       }
     });
