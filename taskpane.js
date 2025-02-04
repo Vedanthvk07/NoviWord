@@ -147,7 +147,7 @@ const initializeDirectLine = async function () {
       console.log("Role", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Bot Response: ", activity.text);
-        displayChatMessage(false, activity, activity.from.role);
+        //displayChatMessage(false, activity, activity.from.role);
         
       }
     });
