@@ -8,9 +8,9 @@
     <h1>Speak Now!</h1>
 
     <script>
-        let recognition=null;
+        
         // Check if SpeechRecognition is supported by the browser
-        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.lang = "en-US"; 
         recognition.interimResults = true; 
         recognition.maxAlternatives = 1; 
@@ -33,16 +33,19 @@
             }
             if (finalTranscript) {
                 window.opener.postMessage(finalTranscript, window.location.origin);
-                recognition.stop(); // Stop recognition after final sentence
+                recognition.stop();
+                recognition=null; // Stop recognition after final sentence
             }
         };
 
         recognition.onerror = function (event) {
             console.error("Error in speech recognition: ", event.error);
+            recognition=null; 
         };
 
         recognition.onend = function () {
             console.log("Speech recognition ended.");
+            recognition=null; 
         };
 
         // Start speech recognition when the pop-up is opened
