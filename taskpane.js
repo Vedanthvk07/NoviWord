@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 
-const { pop } = require("core-js/core/array");
+
 
 //const { split } = require("core-js/fn/symbol");
 let speechFlag = false;
@@ -49,7 +49,7 @@ document.getElementById("insertButton").onclick = async function () {
 
 document.getElementById('startSpeechButton').addEventListener('click', function () {
   // Open a pop-up window
-  const popup = window.open('speech.html', 'SpeechRecognition', 'width=40,height=30');
+  window.open('speech.html', 'SpeechRecognition', 'width=40,height=30');
   speechFlag=true;
   // Listen for messages from the pop-up window
   window.addEventListener("message", async function (event) {
