@@ -115,7 +115,7 @@ function displayChatMessage(question, response, role,directLine) {
         getSelectedText(directLine);  
       }
       else if(response.speak==="paragraph"){
-        setSelectedText(directLine, response.text);  
+        setSelectedText(response.text);  
       }
     
       else if(response.text){
