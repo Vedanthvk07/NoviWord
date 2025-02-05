@@ -145,6 +145,15 @@ function displayChatMessage(question, response, role,directLine) {
         speechFlag = false;  
         } 
       }
+      else if(response.speak==="interim"){
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;
+        if(speechFlag){
+          ensureVoicesLoaded(() => {
+            speakText(response.text);
+        });
+       
+        }      
+      }
     
       else if(response.text){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;
