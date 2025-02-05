@@ -69,6 +69,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
         await getBotResponse(directLine1, question);
       }
       popup.close();
+      mic.classList.remove("recording");
       window.removeEventListener("message", eventHandler);
   }, { once: true });
 });
