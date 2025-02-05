@@ -156,7 +156,13 @@ header img {
 .icon-button svg {
     width: 24px;
     height: 24px;
-    fill: #000; /* Black color */
+    fill: #000; /* Default black color */
+    transition: fill 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover effect - makes the icon color lighter */
+.icon-button:hover svg {
+    fill: #666; /* Lighter gray color on hover */
 }
 
 /* Hide Insert button initially */
