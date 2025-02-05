@@ -160,6 +160,7 @@ header h1 {
     border: none;
     cursor: pointer;
     width: 37%;
+    margin: 0;
 }
 
 #insertButton:hover{
