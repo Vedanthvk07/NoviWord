@@ -48,33 +48,28 @@ document.getElementById("insertButton").onclick = async function () {
 };
 
 document.getElementById('startSpeechButton').addEventListener('click', function () {
-  // Open a pop-up window
-  const popup=window.open('speech.html', 'SpeechRecognition', 'width=40,height=30');
-  speechFlag=true;
+  // Open a pop-up window to handle the speech
+  const popup = window.open('speech.html', 'SpeechRecognition', 'width=400,height=300');
+  speechFlag = true;
   // Listen for messages from the pop-up window
-  flagSpeak=true;
-  window.addEventListener("message", async function (event) {
+  window.addEventListener("message", async function eventHandler(event){
       if (event.origin !== window.location.origin) return; // Security check
-      if(flagSpeak){
-      flagSpeak=false;
+ 
       // Get the recognized text from the pop-up
-      let transcript = event.data;
-      
-      // Insert recognized text into Word document
+      transcript = event.data;
+ 
+      // Insert recognized text into user input
       console.log(transcript);
       document.getElementById("userInput").innerText = transcript;
-      const question=document.getElementById("userInput").innerText 
-      if (question) {
-        displayChatMessage(question, '', "User",directLine1);
-        document.getElementById("userInput").innerText  = "";
+      var question = document.getElementById("userInput").innerText ;
+    if (question) {
+        document.getElementById("userInput").innerText="";
+        displayChatMessage(question, '', "User");
         await getBotResponse(directLine1, question);
-        
-        
-   
-    }
+      }
       popup.close();
-      
-  }});
+      window.removeEventListener("message", eventHandler);
+  }, { once: true });
 });
 
 }
@@ -82,7 +77,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
 
 function displayStartingMessage(starter) {
   const chatWindow = document.getElementById("chatWindow");
-  console.log("attempt 5")
+  
   chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${starter}</div>`; 
   // getDocProperties();    
 }

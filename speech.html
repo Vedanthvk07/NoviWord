@@ -34,13 +34,13 @@
             if (finalTranscript) {
                 window.opener.postMessage(finalTranscript, window.location.origin);
                 recognition.stop();
-                recognition=null; // Stop recognition after final sentence
+                // Stop recognition after final sentence
             }
         };
 
         recognition.onerror = function (event) {
             console.error("Error in speech recognition: ", event.error);
-            recognition=null; 
+            
         };
 
         recognition.onend = function () {
