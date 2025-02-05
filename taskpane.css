@@ -111,8 +111,6 @@ header img {
 }
  
  button {
-    margin-top: 5px;
-    padding: 5px;
     border-radius: 8px;
     background-color: #0078d4;
     color: white;
@@ -126,7 +124,6 @@ header img {
 .input-container {
     display: flex;
     align-items: center;
-    gap: 8px;
     width: 100%;
     margin-top: 10px;
 }
@@ -137,6 +134,7 @@ header img {
     border: 1px solid #ccc;
     border-radius: 20px;
     outline: none;
+    width: 75%;
     font-size: 14px;
 }
 
@@ -145,7 +143,6 @@ header img {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,29 +154,32 @@ header img {
     display: none;
     padding: 8px;
     border-radius: 8px;
-    background-color: #0078d4;
+    background-color: #737374;
     color: white;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 40%;
 }
 
-#sendButton svg {
-    fill: #000; /* Default black color */
+#insertButton:hover{
+    background-color: #d5d5d8;
+    color: rgb(88, 88, 88);
+}
+
+.icon-button svg {
+    stroke: #000; /* Default black color */
     transition: fill 0.3s ease; /* Smooth color transition */
 }
 
 /* Hover effect - makes the icon color lighter */
-#sendButton:hover svg {
-    fill: #666; /* Lighter gray color on hover */
-}
-
-#startSpeechButton svg {
-    stroke: #000; /* Default black color */
-    transition: stroke 0.3s ease; /* Smooth color transition */
-}
-
-/* Hover effect - makes the icon color lighter */
-#startSpeechButton:hover svg {
+.icon-button:hover svg {
     stroke: #666; /* Lighter gray color on hover */
+}
+
+#sendButton{
+    margin-bottom: 10px;
+}
+
+#startSpeechButton{
+    margin-bottom: 15px;
 }
