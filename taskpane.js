@@ -44,6 +44,30 @@ document.getElementById("insertButton").onclick = async function () {
     await insertResponseIntoDocument(response);
   }
 };
+
+document.getElementById('startSpeechButton').addEventListener('click', function () {
+  // Open a pop-up window
+  const popup = window.open('speech.html', 'SpeechRecognition', 'width=40,height=30');
+  speechFlag=true;
+  // Listen for messages from the pop-up window
+  window.addEventListener("message", async function (event) {
+      if (event.origin !== window.location.origin) return; // Security check
+
+      // Get the recognized text from the pop-up
+      const transcript = event.data;
+
+      // Insert recognized text into Word document
+      console.log(transcript);
+      document.getElementById("userInput").value = transcript;
+      if (transcript) {
+        displayChatMessage(transcript, '', "User",directLine1);
+        await getBotResponse(directLine1, transcript);
+   
+    }
+      popup.close();
+  });
+});
+
 }
 });
 
@@ -288,23 +312,7 @@ async function setSelectedText(response) {
   });
 }
 
-document.getElementById('startSpeechButton').addEventListener('click', function () {
-  // Open a pop-up window
-  const popup = window.open('speech.html', 'SpeechRecognition', 'width=40,height=30');
-  speechFlag=true;
-  // Listen for messages from the pop-up window
-  window.addEventListener("message", function (event) {
-      if (event.origin !== window.location.origin) return; // Security check
 
-      // Get the recognized text from the pop-up
-      const transcript = event.data;
-
-      // Insert recognized text into Word document
-      console.log(transcript);
-      document.getElementById("userInput").value = transcript;
-      popup.close();
-  });
-});
 
 function speakText(text) {
   console.log("Testing Text to Speech");
