@@ -12,7 +12,7 @@ Office.onReady(async function (info) {
 if (info.host === Office.HostType.Word) {
   //let flag=true;
   
-document.getElementById("askButton").onclick = async function () {
+document.getElementById("sendButton").onclick = async function () {
   const question = document.getElementById("userInput").value;
   if (question) {
     document.getElementById("headerId").style.display = "none";
