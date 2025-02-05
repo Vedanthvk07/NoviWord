@@ -76,7 +76,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
 
 function displayStartingMessage(starter) {
   const chatWindow = document.getElementById("chatWindow");
-  console.log("attempt 3")
+  console.log("attempt 4")
   chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${starter}</div>`; 
   // getDocProperties();    
 }
