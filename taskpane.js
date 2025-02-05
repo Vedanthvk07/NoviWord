@@ -49,7 +49,7 @@ document.getElementById("insertButton").onclick = async function () {
 
 document.getElementById('startSpeechButton').addEventListener('click', function () {
   // Open a pop-up window to handle the speech
-  const popup = window.open('speech.html', 'SpeechRecognition', 'width=400,height=300');
+  const popup = window.open('speech.html', 'SpeechRecognition', 'width=1,height=1');
   speechFlag = true;
   // Listen for messages from the pop-up window
   window.addEventListener("message", async function eventHandler(event){
