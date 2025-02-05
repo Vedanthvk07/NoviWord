@@ -110,8 +110,12 @@ function displayChatMessage(question, response, role,directLine) {
         textArray=splitText.split("|");
         replaceText(textArray[0],textArray[1]);
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Replaced ${textArray[0]} with ${textArray[1]} </div>`;      
-      }else if(response.speak==="Selected"){
+      }
+      else if(response.speak==="Selected"){
         getSelectedText(directLine);  
+      }
+      else if(response.speak==="paragraph"){
+        setSelectedText(directLine, response.text);  
       }
     
       else if(response.text){
@@ -232,3 +236,10 @@ async function getSelectedText(directLine) {
   
 }
 
+async function setSelectedText(response) {
+  await Word.run(async (context) => {
+    const selection = context.document.getSelection(); 
+    selection.insertText(response, Word.InsertLocation.replace); 
+    await context.sync(); 
+  });
+}
