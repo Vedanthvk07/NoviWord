@@ -54,7 +54,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
       if (event.origin !== window.location.origin) return; // Security check
 
       // Get the recognized text from the pop-up
-      const transcript = event.data;
+      let transcript = event.data;
 
       // Insert recognized text into Word document
       console.log(transcript);
@@ -62,6 +62,8 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
       if (transcript) {
         displayChatMessage(transcript, '', "User",directLine1);
         await getBotResponse(directLine1, transcript);
+        document.getElementById("userInput").value = "";
+        transcript=null;
    
     }
       popup.close();
