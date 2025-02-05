@@ -133,7 +133,7 @@ header img {
 
 /* Rounded input field */
 .input-field {
-    flex: 1;
+    flex: 0.75; /* Takes 75% of the width */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
@@ -152,9 +152,11 @@ header img {
     justify-content: center;
 }
 
-.icon-button img {
+/* Ensure send and mic icons have the same size */
+.icon-button svg {
     width: 24px;
     height: 24px;
+    fill: #000; /* Black color */
 }
 
 /* Hide Insert button initially */
@@ -168,5 +170,3 @@ header img {
     cursor: pointer;
     width: 100%;
 }
-
-
