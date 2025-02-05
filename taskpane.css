@@ -120,9 +120,7 @@ header img {
     cursor: pointer;
   }
  
-  button:hover {
-    background-color: #005a8b;
-  }
+
 
   /* Input container for rounded input field with inline icons */
 .input-container {
@@ -162,7 +160,7 @@ header img {
 /* Hide Insert button initially */
 #insertButton {
     display: none;
-    padding: 10px;
+    padding: 8px;
     border-radius: 8px;
     background-color: #0078d4;
     color: white;
@@ -171,6 +169,4 @@ header img {
     width: 100%;
 }
 
-#insertButton:hover {
-    background-color: #005a8b;
-}
+
