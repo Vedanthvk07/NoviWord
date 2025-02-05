@@ -121,7 +121,7 @@ function displayChatMessage(question, response, role,directLine) {
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">SOW content generated in document</div>`; 
         if(speechFlag){
           ensureVoicesLoaded(() => {
-            speakText("SOW content generated in document");
+            speakText("S.O.W. content generated in document");
         });
        
         speechFlag = false;  
@@ -178,6 +178,7 @@ function displayChatMessage(question, response, role,directLine) {
     
       else if(response.text){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;
+        document.getElementById("insertButton").style.display = "none";
         if(speechFlag){
           ensureVoicesLoaded(() => {
             speakText(response.text);
@@ -190,7 +191,7 @@ function displayChatMessage(question, response, role,directLine) {
     } 
     else {
       if(question){
-      
+        document.getElementById("insertButton").style.display = "none";
         chatWindow.innerHTML += `<div class="user-wrapper">You</div><div class="message user">${question}</div>`;      }
       
     }

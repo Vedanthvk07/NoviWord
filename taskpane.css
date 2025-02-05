@@ -19,6 +19,7 @@
     width: 80%;
     padding: 5px;
     margin-bottom: 10px;
+    
 }
  
 /* Button styling */
@@ -43,7 +44,7 @@ button {
 /* Optional: Add some space for the header */
 header {
     padding: 15px;
-    background-color: #f4f4f4;
+    background-color: #6d6c6c;
     text-align: center;
 }
  
@@ -100,7 +101,7 @@ header img {
 }
  
 .bot {
-    background-color: #e0e0e0;
+    background-color: #6d6c6c;
     color: black;
     align-self: flex-start;
 }
@@ -118,3 +119,55 @@ header img {
   button:hover {
     background-color: #005a8b;
   }
+
+  /* Input container for rounded input field with inline icons */
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Rounded input field */
+.input-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Icon buttons for send and voice input */
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-button img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Hide Insert button initially */
+#insertButton {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+#insertButton:hover {
+    background-color: #005a8b;
+}
