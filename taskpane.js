@@ -59,11 +59,12 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
       // Insert recognized text into Word document
       console.log(transcript);
       document.getElementById("userInput").value = transcript;
-      if (transcript) {
-        displayChatMessage(transcript, '', "User",directLine1);
-        await getBotResponse(directLine1, transcript);
+      const question=document.getElementById("userInput").value
+      if (question) {
+        displayChatMessage(question, '', "User",directLine1);
+        await getBotResponse(directLine1, question);
         document.getElementById("userInput").value = "";
-        transcript=null;
+        
    
     }
       popup.close();
