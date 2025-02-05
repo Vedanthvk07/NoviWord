@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 
 //const { split } = require("core-js/fn/symbol");
+let speechFlag = false;
 
 Office.onReady(async function (info) {
   displayStartingMessage("Hi, I am your word assistant bot-NoviWord");
@@ -98,28 +99,62 @@ function displayChatMessage(question, response, role,directLine) {
 
         insertResponseIntoDocument(response.text);
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">SOW content generated in document</div>`; 
-      
+        if(speechFlag){
+          ensureVoicesLoaded(() => {
+            speakText("SOW content generated in document");
+        });
+       
+        speechFlag = false;  
+        }
       }else if(response.speak==="Table"){
 
         insertResponseIntoDocumentAtCursor(response.text);
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table generated in document</div>`;      
-      
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table has been generated in document</div>`;      
+        if(speechFlag){
+          ensureVoicesLoaded(() => {
+            speakText("Table has been generated in document");
+        });
+       
+        speechFlag = false;  
+        }
       }
       else if(response.speak==="Replace"){
         splitText=response.text
         textArray=splitText.split("|");
         replaceText(textArray[0],textArray[1]);
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Replaced ${textArray[0]} with ${textArray[1]} </div>`;      
+        if(speechFlag){
+          ensureVoicesLoaded(() => {
+            speakText(`Replaced ${textArray[0]} with ${textArray[1]}`);
+        });
+       
+        speechFlag = false;  
+        }
       }
       else if(response.speak==="Selected"){
         getSelectedText(directLine);  
       }
       else if(response.speak==="paragraph"){
-        setSelectedText(response.text);  
+        setSelectedText(response.text);
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Requested changes have been made in the document</div>`;  
+        if(speechFlag){
+          ensureVoicesLoaded(() => {
+            speakText("Requested changes have been made in the document");
+        });
+       
+        speechFlag = false;  
+        } 
       }
     
       else if(response.text){
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;      
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;
+        if(speechFlag){
+          ensureVoicesLoaded(() => {
+            speakText(response.text);
+        });
+       
+        speechFlag = false;  
+        }      
       }
       
     } 
@@ -242,4 +277,57 @@ async function setSelectedText(response) {
     selection.insertText(response, Word.InsertLocation.replace); 
     await context.sync(); 
   });
+}
+
+document.getElementById('startSpeechButton').addEventListener('click', function () {
+  // Open a pop-up window
+  const popup = window.open('speech.html', 'SpeechRecognition', 'width=40,height=30');
+  speechFlag=true;
+  // Listen for messages from the pop-up window
+  window.addEventListener("message", function (event) {
+      if (event.origin !== window.location.origin) return; // Security check
+
+      // Get the recognized text from the pop-up
+      const transcript = event.data;
+
+      // Insert recognized text into Word document
+      console.log(transcript);
+      document.getElementById("userInput").value = transcript;
+      popup.close();
+  });
+});
+
+function speakText(text) {
+  console.log("Testing Text to Speech");
+  let voices = window.speechSynthesis.getVoices();
+  console.log("Voices******", voices);
+  let femaleVoice = voices.find(voice => voice.name.includes("Female") ||
+  voice.name.includes("Google UK English Female") ||
+   voice.name.includes("Microsoft Zira")||
+   voice.name.includes("Samantha")
+  );
+  console.log("Set voice********", femaleVoice);
+  const speech = new SpeechSynthesisUtterance(text);
+  // speech.lang = 'en-US'; // Set language
+  // speech.rate = 1; // Speed of speech (0.1 to 10)
+  // speech.pitch = 1; // Pitch (0 to 2)
+  // speech.volume = 1; // Volume (0 to 1)
+  if (femaleVoice) {
+    speech.voice = femaleVoice;
+} else {
+    console.warn("Female voice not found. Using default voice.");
+}
+  window.speechSynthesis.speak(speech);
+}
+ 
+ 
+// Load voices properly before calling the function
+function ensureVoicesLoaded(callback) {
+  let voices = window.speechSynthesis.getVoices();
+ 
+  if (voices.length > 0) {
+      callback();
+  } else {
+      window.speechSynthesis.onvoiceschanged = callback;
+  }
 }

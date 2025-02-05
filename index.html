@@ -47,24 +47,7 @@
         
  
     </main>
-    <script>
-        document.getElementById('startSpeechButton').addEventListener('click', function () {
-            // Open a pop-up window
-            const popup = window.open('speech.html', 'SpeechRecognition', 'width=400,height=300');
- 
-            // Listen for messages from the pop-up window
-            window.addEventListener("message", function (event) {
-                if (event.origin !== window.location.origin) return; // Security check
- 
-                // Get the recognized text from the pop-up
-                const transcript = event.data;
- 
-                // Insert recognized text into Word document
-                console.log(transcript);
-                document.getElementById("userInput").value = transcript;
-            });
-        });
-    </script>
+    
     <script type="text/javascript" src="taskpane.js"></script>
 </body>
  
