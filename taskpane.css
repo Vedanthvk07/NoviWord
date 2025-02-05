@@ -153,13 +153,13 @@ header h1 {
 /* Hide Insert button initially */
 #insertButton {
     display: none;
-    padding: 8px;
+    padding: 5px;
     border-radius: 8px;
     background-color: #737374;
     color: white;
     border: none;
     cursor: pointer;
-    width: 40%;
+    width: 37%;
 }
 
 #insertButton:hover{
