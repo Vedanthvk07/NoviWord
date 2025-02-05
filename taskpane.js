@@ -156,6 +156,7 @@ function displayChatMessage(question, response, role,directLine) {
         }
       }
       else if(response.speak==="Selected"){
+        console.log("fetching selected data")
         getSelectedText(directLine);  
       }
       else if(response.speak==="paragraph"){
