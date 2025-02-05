@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 
+const { pop } = require("core-js/core/array");
+
 //const { split } = require("core-js/fn/symbol");
 let speechFlag = false;
 
@@ -58,16 +60,18 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
 
       // Insert recognized text into Word document
       console.log(transcript);
-      document.getElementById("userInput").value = transcript;
-      const question=document.getElementById("userInput").value
+      document.getElementById("userInput").innerText = transcript;
+      const question=document.getElementById("userInput").innerText 
       if (question) {
         displayChatMessage(question, '', "User",directLine1);
+        document.getElementById("userInput").innerText  = "";
         await getBotResponse(directLine1, question);
-        document.getElementById("userInput").value = "";
+        
         
    
     }
-      popup.close();
+      //popup.close();
+      
   });
 });
 
@@ -76,7 +80,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
 
 function displayStartingMessage(starter) {
   const chatWindow = document.getElementById("chatWindow");
-  console.log("attempt 4")
+  console.log("attempt 5")
   chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${starter}</div>`; 
   // getDocProperties();    
 }
