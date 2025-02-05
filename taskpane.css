@@ -131,9 +131,8 @@ header img {
     margin-top: 10px;
 }
 
-/* Rounded input field */
 .input-field {
-    flex: 0.75; /* Takes 75% of the width */
+    flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
@@ -152,18 +151,6 @@ header img {
     justify-content: center;
 }
 
-/* Ensure send and mic icons have the same size */
-.icon-button svg {
-
-    fill:#ccc;
-    stroke: #000; /* Default black color */
-    transition: stroke 0.3s ease; /* Smooth color transition */
-}
-
-/* Hover effect - makes the icon color lighter */
-.icon-button:hover svg {
-    stroke: #d6d6d6; /* Lighter gray color on hover */
-}
 
 /* Hide Insert button initially */
 #insertButton {
@@ -175,4 +162,24 @@ header img {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+
+#sendButton svg {
+    fill: #000; /* Default black color */
+    transition: fill 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover effect - makes the icon color lighter */
+#sendButton:hover svg {
+    fill: #666; /* Lighter gray color on hover */
+}
+
+#startSpeechButton svg {
+    stroke: #000; /* Default black color */
+    transition: stroke 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover effect - makes the icon color lighter */
+#startSpeechButton:hover svg {
+    stroke: #666; /* Lighter gray color on hover */
 }
