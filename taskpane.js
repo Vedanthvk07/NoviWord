@@ -49,15 +49,17 @@ document.getElementById("insertButton").onclick = async function () {
 
 document.getElementById('startSpeechButton').addEventListener('click', function () {
   // Open a pop-up window
-  window.open('speech.html', 'SpeechRecognition', 'width=40,height=30');
+  const popup=window.open('speech.html', 'SpeechRecognition', 'width=40,height=30');
   speechFlag=true;
   // Listen for messages from the pop-up window
+  flagSpeak=true;
   window.addEventListener("message", async function (event) {
       if (event.origin !== window.location.origin) return; // Security check
-
+      if(flagSpeak){
+      flagSpeak=false;
       // Get the recognized text from the pop-up
       let transcript = event.data;
-
+      
       // Insert recognized text into Word document
       console.log(transcript);
       document.getElementById("userInput").innerText = transcript;
@@ -70,9 +72,9 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
         
    
     }
-      //popup.close();
+      popup.close();
       
-  });
+  }});
 });
 
 }
