@@ -11,6 +11,10 @@
     display: flex;
     flex-direction: column;
 }
+
+body{
+    background-color: #ccc;
+}
 .chat-window::-webkit-scrollbar {
     display: none;  /* Hide scrollbar in Chrome, Safari */
 }
@@ -101,7 +105,7 @@ header img {
 }
  
 .bot {
-    background-color: #6d6c6c;
+    background-color: #dbdada;
     color: black;
     align-self: flex-start;
 }
