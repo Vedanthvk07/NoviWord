@@ -60,10 +60,10 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
  
       // Insert recognized text into user input
       console.log(transcript);
-      document.getElementById("userInput").innerText = transcript;
-      var question = document.getElementById("userInput").innerText ;
+      document.getElementById("userInput").value = transcript;
+      var question = document.getElementById("userInput").value  ;
     if (question) {
-        document.getElementById("userInput").innerText="";
+        document.getElementById("userInput").value ="";
         displayChatMessage(question, '', "User");
         await getBotResponse(directLine1, question);
       }
@@ -79,19 +79,10 @@ function displayStartingMessage(starter) {
   const chatWindow = document.getElementById("chatWindow");
   
   chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${starter}</div>`; 
-  // getDocProperties();    
+    
 }
 
-// async function getDocProperties() {
-//   await Word.run(async (context) => {
-//   let docProperties = context.document.properties;
-//     docProperties.load("title");
-    
-//     await context.sync();
-//     console.log("Document Name: ", docProperties.title);
-//     console.log("Document props: ", docProperties);
-//   });
-// }
+
 // Display user question and bot response in chat window
 function displayChatMessage(question, response, role,directLine) {
   const chatWindow = document.getElementById("chatWindow");
