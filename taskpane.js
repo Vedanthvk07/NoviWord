@@ -7,7 +7,7 @@
 let speechFlag = false;
 
 Office.onReady(async function (info) {
-  displayStartingMessage("Hi, I am your word assistant bot-NoviWord");
+  displayStartingMessage("Hi! I'm NoviWord, your Word assistant bot. I can help you create documents, modify content, and insert useful information seamlessly. How can I assist you today?");
   let directLine1 = await initializeDirectLine();
 if (info.host === Office.HostType.Word) {
   //let flag=true;
@@ -49,6 +49,7 @@ document.getElementById("insertButton").onclick = async function () {
 
 document.getElementById('startSpeechButton').addEventListener('click', function () {
   // Open a pop-up window to handle the speech
+  mic.classList.toggle("recording");
   const popup = window.open('speech.html', 'SpeechRecognition', 'width=1,height=1');
   speechFlag = true;
   // Listen for messages from the pop-up window
