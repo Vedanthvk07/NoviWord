@@ -243,6 +243,7 @@ async function insertResponseIntoDocument(response) {
 
 async function insertResponseIntoDocumentAtCursor(response, insertAt) {
   if(insertAt==="end"){
+    console.log("end of doc table")
   await Word.run(async (context) => {
     const body = context.document.body;
     body.insertHtml(response, Word.InsertLocation.after);
@@ -252,13 +253,14 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
   await Word.run(async (context) => {
     const selection = context.document.getSelection();
     selection.load("parentTable");
-    
+    console.log("replace table")
     await context.sync();
 
     if (selection.parentTable) {
         selection.parentTable.delete();
         await context.sync();
-
+        console.log("replaced",selection.parentTable)
+        console.log("replacing table")
         
         selection.insertHtml(response, Word.InsertLocation.replace);
         await context.sync();
@@ -311,6 +313,7 @@ const initializeDirectLine = async function () {
 };
 
 const getBotResponse = async function (directLine, question) {
+  console.log("User:",question);
   directLine
     .postActivity({
       from: { id: "10", name: "User" },
