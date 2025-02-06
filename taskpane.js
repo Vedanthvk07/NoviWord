@@ -255,11 +255,15 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
       selection.load("parentTable");
       await context.sync();
       if (selection.parentTable) {
-        selection.parentTable.delete();
-        
+        const table = selection.parentTable;
+        const tableRange = table.getRange(Word.RangeLocation.entire); // Get range before deletion
+        tableRange.load();
         await context.sync();
-        
-        selection.insertHtml(response, Word.InsertLocation.replace);
+
+        table.delete(); // Delete the old table
+        await context.sync();
+
+        tableRange.insertHtml(response, Word.InsertLocation.replace); // Insert new HTML at same place
         await context.sync();
       } else {
         console.log("No table selected.");
