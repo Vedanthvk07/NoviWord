@@ -261,7 +261,8 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
       table.load("range");
 
       await context.sync();
-
+      table.range.delete();
+      await context.sync();
       table.range.insertHtml(response, Word.InsertLocation.replace);
       await context.sync();
         return true;
