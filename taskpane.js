@@ -246,7 +246,7 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
     console.log("end of doc table")
   await Word.run(async (context) => {
     const body = context.document.body;
-    body.insertHtml(response, Word.InsertLocation.after);
+    body.insertHtml(response, Word.InsertLocation.end);
     await context.sync();
   });
 }else{
