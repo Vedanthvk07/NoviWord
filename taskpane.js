@@ -254,22 +254,22 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
       const selection = context.document.getSelection();
       selection.insertHtml(response, Word.InsertLocation.replace);
       await context.sync();
-      selection.load("parentTable");
-      await context.sync();
-      if (selection.parentTable) {
-        const table = selection.parentTable;
-        const tableRange = table.getRange(Word.RangeLocation.entire); // Get range before deletion
-        tableRange.load();
-        await context.sync();
+      //selection.load("parentTable");
+      // await context.sync();
+      // if (selection.parentTable) {
+      //   // const table = selection.parentTable;
+      //   // const tableRange = table.getRange(Word.RangeLocation.entire); // Get range before deletion
+      //   // tableRange.load();
+      //   // await context.sync();
 
-        table.delete(); // Delete the old table
-        await context.sync();
+      //   // table.delete(); // Delete the old table
+      //   // await context.sync();
 
-        tableRange.insertHtml(response, Word.InsertLocation.replace); // Insert new HTML at same place
-        await context.sync();
-      } else {
-        console.log("No table selected.");
-      }
+      //   // tableRange.insertHtml(response, Word.InsertLocation.replace); // Insert new HTML at same place
+      //   // await context.sync();
+      // } else {
+      //   console.log("No table selected.");
+      // }
     });
   }
 }
