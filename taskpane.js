@@ -259,6 +259,7 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
       if (selection.parentTable) {
         const table = selection.parentTable;
         table.delete();
+        await context.sync();
         const selection = context.document.getSelection();
         selection.insertHtml(response, Word.InsertLocation.replace);
         await context.sync();
