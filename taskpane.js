@@ -242,37 +242,41 @@ async function insertResponseIntoDocument(response) {
 }
 
 async function insertResponseIntoDocumentAtCursor(response, insertAt) {
-  if(insertAt==="end"){
-    console.log("end of doc table")
-  await Word.run(async (context) => {
-    const body = context.document.body;
-    body.insertHtml(response, Word.InsertLocation.end);
-    await context.sync();
-  });
-}else{
-  await Word.run(async (context) => {
-    const selection = context.document.getSelection();
-    selection.load("parentTable");
-    console.log("replace table")
-    await context.sync();
-
-    if (selection.parentTable) {
-      const table = selection.parentTable;
-      table.load("range");
+  if (insertAt === "end") {
+    console.log("end of doc table");
+    await Word.run(async (context) => {
+      const body = context.document.body;
+      body.insertHtml(response, Word.InsertLocation.end);
+      await context.sync();
+    });
+  } else {
+    await Word.run(async (context) => {
+      const selection = context.document.getSelection();
+      selection.load("parentTable");
 
       await context.sync();
-      table.range.delete();
-      await context.sync();
-      table.range.insertHtml(response, Word.InsertLocation.replace);
-      await context.sync();
-        return true;
-    } else {
+
+      if (selection.parentTable) {
+        const table = selection.parentTable;
+        table.load(["range"]); // Load the table's range properly
+        await context.sync();
+
+        if (table.range) { // Ensure range is not undefined before calling delete()
+          table.range.delete();
+          await context.sync();
+          
+          table.range.insertHtml(response, Word.InsertLocation.replace);
+          await context.sync();
+        } else {
+          console.log("Table range not found.");
+        }
+      } else {
         console.log("No table selected.");
-        return false;
-    }
-});
+      }
+    });
+  }
 }
-}
+
 const initializeDirectLine = async function () {
   try {
     const response = await fetch(
