@@ -258,18 +258,10 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
 
       if (selection.parentTable) {
         const table = selection.parentTable;
-        table.load(["range"]); // Load the table's range properly
+        table.delete();
+        const selection = context.document.getSelection();
+        selection.insertHtml(response, Word.InsertLocation.replace);
         await context.sync();
-
-        if (table.range) { // Ensure range is not undefined before calling delete()
-          table.range.delete();
-          await context.sync();
-          
-          table.range.insertHtml(response, Word.InsertLocation.replace);
-          await context.sync();
-        } else {
-          console.log("Table range not found.");
-        }
       } else {
         console.log("No table selected.");
       }
