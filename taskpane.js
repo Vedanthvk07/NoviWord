@@ -257,13 +257,13 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
     await context.sync();
 
     if (selection.parentTable) {
-        selection.parentTable.delete();
-        await context.sync();
-        console.log("replaced",selection.parentTable)
-        console.log("replacing table")
-        
-        selection.insertHtml(response, Word.InsertLocation.replace);
-        await context.sync();
+      const table = selection.parentTable;
+      table.load("range");
+
+      await context.sync();
+
+      table.range.insertHtml(response, Word.InsertLocation.replace);
+      await context.sync();
         return true;
     } else {
         console.log("No table selected.");
