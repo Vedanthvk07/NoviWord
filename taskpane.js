@@ -86,7 +86,7 @@ function displayStartingMessage(starter) {
 
 
 // Display user question and bot response in chat window
-function displayChatMessage(question, response, role,directLine) {
+async function displayChatMessage(question, response, role,directLine) {
   const chatWindow = document.getElementById("chatWindow");
 
   // Check if response is valid and if attachments exist
@@ -130,7 +130,7 @@ function displayChatMessage(question, response, role,directLine) {
         }
       }else if(response.speak==="Table"){
 
-        insertResponseIntoDocumentAtCursor(response.text);
+        insertResponseIntoDocumentAtCursor(response.text, "end");
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table has been generated in document</div>`;      
         if(speechFlag){
           ensureVoicesLoaded(() => {
@@ -138,6 +138,29 @@ function displayChatMessage(question, response, role,directLine) {
         });
        
         speechFlag = false;  
+        }
+      }
+      else if(response.speak==="TableReplace"){
+       
+        statusflag=await insertResponseIntoDocumentAtCursor(response.text,"replace");
+        if(statusflag){
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table has been generated in document</div>`;      
+        if(speechFlag){
+          ensureVoicesLoaded(() => {
+            speakText("Table has been replaced in document");
+        });
+       
+        speechFlag = false;  
+        }}
+        else{
+          chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">No table has been selected in the document</div>`;      
+        if(speechFlag){
+          ensureVoicesLoaded(() => {
+            speakText("No table has been selected in the document");
+        });
+       
+        speechFlag = false;  
+        }
         }
       }
       else if(response.speak==="Replace"){
@@ -154,8 +177,14 @@ function displayChatMessage(question, response, role,directLine) {
         }
       }
       else if(response.speak==="Selected"){
+        if(response.text==="Table"){
+          console.log("fetching selected table")
+          getSelectedTable(directLine); 
+        }
+        else{
         console.log("fetching selected data")
         getSelectedText(directLine);  
+        }
       }
       else if(response.speak==="paragraph"){
         setSelectedText(response.text);
@@ -212,12 +241,34 @@ async function insertResponseIntoDocument(response) {
   });
 }
 
-async function insertResponseIntoDocumentAtCursor(response) {
+async function insertResponseIntoDocumentAtCursor(response, insertAt) {
+  if(insertAt==="end"){
   await Word.run(async (context) => {
     const body = context.document.body;
     body.insertHtml(response, Word.InsertLocation.after);
     await context.sync();
   });
+}else{
+  await Word.run(async (context) => {
+    const selection = context.document.getSelection();
+    selection.load("parentTable");
+    
+    await context.sync();
+
+    if (selection.parentTable) {
+        selection.parentTable.delete();
+        await context.sync();
+
+        
+        selection.insertHtml(response, Word.InsertLocation.replace);
+        await context.sync();
+        return true;
+    } else {
+        console.log("No table selected.");
+        return false;
+    }
+});
+}
 }
 const initializeDirectLine = async function () {
   try {
@@ -301,6 +352,39 @@ async function getSelectedText(directLine) {
     SelText=range.text;
     await getBotResponse(directLine, SelText);
 });
+  
+}
+
+async function getSelectedTable(directLine) {
+
+  await Word.run(async (context) => {
+    const selection = context.document.getSelection();
+    selection.load("parentTable");
+
+    await context.sync();
+
+    if (selection.parentTable) {
+        const table = selection.parentTable;
+        table.load("values"); // Get table content as a 2D array
+        
+        await context.sync();
+
+        const tableValues = table.values; // Array of rows with cell content
+
+        let plainTextTable = "";
+        tableValues.forEach(row => {
+            plainTextTable += row.join(" | ") + "\n"; // Join cells with "|"
+        });
+
+        console.log(plainTextTable);
+        await getBotResponse(directLine, plainTextTable);
+         // Output the extracted table as plain text
+    } else {
+        console.log("No table selected.");
+        
+    }
+});
+ 
   
 }
 
