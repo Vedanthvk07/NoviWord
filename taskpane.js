@@ -253,9 +253,7 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
     await Word.run(async (context) => {
       const selection = context.document.getSelection();
       selection.load("parentTable");
-
       await context.sync();
-
       if (selection.parentTable) {
         selection.parentTable.delete();
         
@@ -296,7 +294,7 @@ const initializeDirectLine = async function () {
       );
 
     directLine.activity$.subscribe((activity) => {
-      console.log("Testing activity: ", activity);
+      console.log("Testing activity on send: ", activity);
       console.log("Role", activity.from.role);
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Bot Response: ", activity.text);
@@ -381,7 +379,7 @@ async function getSelectedTable(directLine) {
         await getBotResponse(directLine, plainTextTable);
          // Output the extracted table as plain text
     } else {
-        console.log("No table selected.");
+        console.log("No table selected by user.");
         
     }
 });
