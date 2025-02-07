@@ -136,7 +136,7 @@ async function displayChatMessage(question, response, role,directLine) {
             speakText("S.O.W. content generated in document");
         });
        
-        speechFlag = false;  
+        //speechFlag = false;  
         }
       }else if(response.speak==="Table"){
 
@@ -147,7 +147,7 @@ async function displayChatMessage(question, response, role,directLine) {
             speakText("Table has been generated in document");
         });
        
-        speechFlag = false;  
+        //speechFlag = false;  
         }
       }
       else if(response.speak==="TableReplace"){
@@ -161,7 +161,7 @@ async function displayChatMessage(question, response, role,directLine) {
             speakText("Table has been generated in document");
         });
        
-        speechFlag = false;  
+        //speechFlag = false;  
         }}
         else{
           chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">No table is selected in the document</div>`;      
@@ -170,7 +170,7 @@ async function displayChatMessage(question, response, role,directLine) {
             speakText("No table is selected in the document");
         });
        
-        speechFlag = false;  
+        //speechFlag = false;  
         }
         }
       }
@@ -184,7 +184,7 @@ async function displayChatMessage(question, response, role,directLine) {
             speakText(`Replaced ${textArray[0]} with ${textArray[1]}`);
         });
        
-        speechFlag = false;  
+        //speechFlag = false;  
         }
       }
       else if(response.speak==="Selected"){
@@ -205,7 +205,7 @@ async function displayChatMessage(question, response, role,directLine) {
             speakText("Requested changes have been made in the document");
         });
        
-        speechFlag = false;  
+        //speechFlag = false;  
         } 
       }
       else if(response.speak==="interim"){
@@ -226,7 +226,7 @@ async function displayChatMessage(question, response, role,directLine) {
             speakText(response.text);
         });
        
-        speechFlag = false;  
+        //speechFlag = false;  
         }      
       }
       
@@ -432,27 +432,44 @@ async function setSelectedText(response) {
 
 
 
-function speakText(text) {
+async function speakText(text) {
   console.log("Testing Text to Speech");
+  
   let voices = window.speechSynthesis.getVoices();
-  console.log("Voices******", voices);
-  let femaleVoice = voices.find(voice => voice.name.includes("Female") ||
-  voice.name.includes("Google UK English Female") ||
-   voice.name.includes("Microsoft Zira")||
-   voice.name.includes("Samantha")
+  console.log("Voices:", voices);
+  
+  let femaleVoice = voices.find(voice => 
+    voice.name.includes("Female") ||
+    voice.name.includes("Google UK English Female") ||
+    voice.name.includes("Microsoft Zira") ||
+    voice.name.includes("Samantha")
   );
-  console.log("Set voice********", femaleVoice);
+
+  console.log("Set voice:", femaleVoice);
+  
   const speech = new SpeechSynthesisUtterance(text);
-  // speech.lang = 'en-US'; // Set language
-  // speech.rate = 1; // Speed of speech (0.1 to 10)
-  // speech.pitch = 1; // Pitch (0 to 2)
-  // speech.volume = 1; // Volume (0 to 1)
+
   if (femaleVoice) {
     speech.voice = femaleVoice;
-} else {
+  } else {
     console.warn("Female voice not found. Using default voice.");
-}
-  window.speechSynthesis.speak(speech);
+  }
+
+  return new Promise((resolve) => {
+    speech.onend = () => {
+      console.log("Speech has finished.");
+      speechFlag=false;
+      resolve(true); 
+    };
+
+    speech.onerror = (event) => {
+      console.error("Speech error:", event.error);
+      speechFlag=false;
+      resolve(false); 
+    };
+
+    window.speechSynthesis.speak(speech);
+  });
 }
  
  
