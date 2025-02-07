@@ -68,7 +68,7 @@ header h1 {
  
 .chat-window-main {
     margin: auto;
-    background: rgb(58, 54, 54);
+    background: rgb(85, 82, 82);
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -104,14 +104,14 @@ header h1 {
 }
  
 .user {
-    background-color: #3498db;
+    background-color: #17155f;
     color: white;
     align-self: flex-end;
 }
  
 .bot {
     background-color: #797f83;
-    color: black;
+    color: rgb(230, 227, 227);
     align-self: flex-start;
 }
  
@@ -173,13 +173,13 @@ header h1 {
 }
  
 .icon-button svg {
-    stroke: #000; /* Default black color */
-    transition: fill 0.3s ease; /* Smooth color transition */
+    stroke: #17155f; /* Default black color */
+    transition: stroke 0.3s ease; /* Smooth color transition */
 }
  
 /* Hover effect - makes the icon color lighter */
 .icon-button:hover svg {
-    stroke: #666; /* Lighter gray color on hover */
+    stroke: #7f7eb3; /* Lighter gray color on hover */
 }
  
 #sendButton{
