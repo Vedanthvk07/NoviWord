@@ -143,6 +143,7 @@ async function displayChatMessage(question, response, role,directLine) {
       else if(response.speak==="TableReplace"){
        
         statusflag=await insertResponseIntoDocumentAtCursor(response.text,"replace");
+        console.log(statusflag);
         if(statusflag){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table has been generated in document</div>`;      
         if(speechFlag){
@@ -248,6 +249,7 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
       const body = context.document.body;
       body.insertHtml(response, Word.InsertLocation.end);
       await context.sync();
+      return true;
     });
   } else {
     await Word.run(async (context) => {
