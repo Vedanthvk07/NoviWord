@@ -54,12 +54,18 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
  //console.log("popup:",popup);
  console.log("spFlag",speechFlag);
   if(speechFlag){
+    if(popup){
     popup.close();
+    }
     mic.classList.toggle("recording");
   }
   else{
   mic.classList.toggle("recording");
-  const popup = window.open('speech.html', 'SpeechRecognition', 'width=1,height=1');
+  const popup = window.open(
+    'speech.html',
+    'SpeechRecognition',
+    'width=1,height=1,top=-10000,left=-10000,noopener,noreferrer'
+  );
   speechFlag = true;
   // Listen for messages from the pop-up window
   window.addEventListener("message", async function eventHandler(event){
