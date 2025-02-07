@@ -11,9 +11,11 @@
     display: flex;
     flex-direction: column;
 }
-
+ 
 body{
     background-color: #ccc;
+    background: linear-gradient(to right, grey 30%, #dbdbda 70%);
+ 
 }
 .chat-window::-webkit-scrollbar {
     display: none;  /* Hide scrollbar in Chrome, Safari */
@@ -23,7 +25,8 @@ body{
     width: 80%;
     padding: 5px;
     margin-bottom: 10px;
-    
+    background-color: rgb(58, 54, 54);
+    color: white;
 }
  
 /* Button styling */
@@ -57,7 +60,7 @@ header h1 {
     font-size: 24px;
 }
  
-
+ 
 .bot img {
     max-width: 20px;
     max-height: 20px;
@@ -65,7 +68,7 @@ header h1 {
  
 .chat-window-main {
     margin: auto;
-    background: #fff;
+    background: rgb(58, 54, 54);
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -86,6 +89,7 @@ header h1 {
     font-weight: bold;
     display: flex;
     justify-content: flex-start; /* Align bot message to the left */
+    color: #dbdada;
 }
 .message {
     max-width: 70%; /* Prevents divs from becoming too wide */
@@ -106,7 +110,7 @@ header h1 {
 }
  
 .bot {
-    background-color: #dbdada;
+    background-color: #797f83;
     color: black;
     align-self: flex-start;
 }
@@ -119,8 +123,8 @@ header h1 {
     cursor: pointer;
   }
  
-
-
+ 
+ 
   /* Input container for rounded input field with inline icons */
 .input-container {
     display: flex;
@@ -128,7 +132,7 @@ header h1 {
     width: 100%;
     margin-top: 10px;
 }
-
+ 
 .input-field {
     flex: 1;
     padding: 10px;
@@ -138,7 +142,7 @@ header h1 {
     width: 75%;
     font-size: 14px;
 }
-
+ 
 /* Icon buttons for send and voice input */
 .icon-button {
     background: none;
@@ -148,8 +152,8 @@ header h1 {
     align-items: center;
     justify-content: center;
 }
-
-
+ 
+ 
 /* Hide Insert button initially */
 #insertButton {
     display: none;
@@ -162,38 +166,38 @@ header h1 {
     width: 37%;
     margin: 0;
 }
-
+ 
 #insertButton:hover{
     background-color: #d5d5d8;
     color: rgb(88, 88, 88);
 }
-
+ 
 .icon-button svg {
     stroke: #000; /* Default black color */
     transition: fill 0.3s ease; /* Smooth color transition */
 }
-
+ 
 /* Hover effect - makes the icon color lighter */
 .icon-button:hover svg {
     stroke: #666; /* Lighter gray color on hover */
 }
-
+ 
 #sendButton{
     margin-bottom: 10px;
 }
-
+ 
 #startSpeechButton{
     margin-bottom: 15px;
 }
-
+ 
 .mic {
     transition: transform 0.2s ease-in-out;
 }
-
+ 
 .recording {
     animation: pulse 1.2s infinite ease-in-out;
 }
-
+ 
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -208,3 +212,10 @@ header h1 {
         opacity: 1;
     }
 }
+ 
+.header-img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%; /* Makes the image circular */
+    border: 2px solid #ccc; /* Optional: Adds a border */
+  }

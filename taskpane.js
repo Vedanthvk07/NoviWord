@@ -257,7 +257,7 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
   
       if (!selection.parentTable) {
           console.log("❌ No table selected.");
-          return;
+          return false;
       }
   
       const table = selection.parentTable;
@@ -265,7 +265,7 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
       tableRange.load(); 
       await context.sync();
   
-      console.log("✅ Table found. Deleting...");
+      console.log("Table found. Deleting...");
       
       // Insert a placeholder before deleting (to keep a valid reference)
       const placeholder = tableRange.insertText(" ", Word.InsertLocation.before);
@@ -274,13 +274,14 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
   
       table.delete(); // Delete the table
       await context.sync();
-      console.log("✅ Table deleted.");
+      console.log("Table deleted.");
   
-      console.log("✅ Inserting new table...");
+      console.log("Inserting new table...");
       placeholder.insertHtml(response, Word.InsertLocation.replace); // Insert new content
       await context.sync();
   
-      console.log("✅ New table inserted.");
+      console.log("New table inserted.");
+      return true;
   });
   }}
 
