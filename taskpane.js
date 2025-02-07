@@ -351,8 +351,9 @@ async function replaceText(oldText,NewText){
     let results = context.document.body.search(oldText);
     results.load();
     await context.sync();
-    
+    console.log("result:",results);
     results.items.forEach(item => {
+      console.log("item:",item);
         item.insertText(NewText, Word.InsertLocation.replace);
     });
     
