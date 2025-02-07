@@ -104,14 +104,14 @@ header h1 {
 }
  
 .user {
-    background-color: #17155f;
+    background-color: #3498db;
     color: white;
     align-self: flex-end;
 }
  
 .bot {
-    background-color: #797f83;
-    color: rgb(230, 227, 227);
+    background-color: rgb(243, 235, 220);
+    color: rgb(8, 8, 8);
     align-self: flex-start;
 }
  
