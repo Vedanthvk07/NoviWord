@@ -141,8 +141,8 @@ async function displayChatMessage(question, response, role,directLine) {
         }
       }
       else if(response.speak==="TableReplace"){
-       
-        let statusflag=await insertResponseIntoDocumentAtCursor(response.text,"replace");
+        let statusflag=false;
+        statusflag=await insertResponseIntoDocumentAtCursor(response.text,"replace");
         console.log(statusflag);
         if(statusflag){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table has been generated in document</div>`;      
