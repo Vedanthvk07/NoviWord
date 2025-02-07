@@ -346,19 +346,24 @@ function scrollToBottom() {
   }, 100); // Timeout ensures scroll happens after the new message is rendered
 }
 
-async function replaceText(oldText,NewText){
+async function replaceText(oldText, newText) {
   await Word.run(async (context) => {
-    let results = context.document.body.search(oldText);
-    results.load();
-    await context.sync();
-    console.log("result:",results);
-    results.items.forEach(item => {
-      console.log("item:",item);
-        item.insertText(NewText, Word.InsertLocation.replace);
-    });
-    
-    await context.sync();
-});
+      let results = context.document.body.search(oldText, { matchCase: false }); 
+      results.load("items");
+      await context.sync();
+
+      console.log("Results found:", results.items.length);
+
+      
+      for (let i = results.items.length - 1; i >= 0; i--) {
+          let item = results.items[i];
+          console.log("Replacing:", item.text);
+          item.insertText(newText, Word.InsertLocation.replace);
+      }
+
+      await context.sync();
+      console.log("ll instances replaced successfully.");
+  });
 }
 
 async function getSelectedText(directLine) {
