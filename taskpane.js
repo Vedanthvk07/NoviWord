@@ -54,10 +54,15 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
  //console.log("popup:",popup);
  console.log("spFlag",speechFlag);
   if(speechFlag){
-    if(popup){
-    popup.close();
-    }
     mic.classList.toggle("recording");
+    
+    try{
+      popup.close();
+    }
+    catch{
+      console.log("popup closed")
+    }
+    
   }
   else{
   mic.classList.toggle("recording");
