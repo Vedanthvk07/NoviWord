@@ -158,7 +158,7 @@ header h1 {
 /* Hide Insert button initially */
 #insertButton {
     display: none;
-    padding: 5px;
+    padding: 7px 15px;
     border-radius: 8px;
     background-color: #3498db;
     color: white;
