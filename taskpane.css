@@ -25,8 +25,8 @@ body{
     width: 80%;
     padding: 5px;
     margin-bottom: 10px;
-    background-color: rgb(58, 54, 54);
-    color: white;
+    background-color: whitesmoke;
+    color: black;
 }
  
 /* Button styling */
@@ -83,7 +83,7 @@ header h1 {
     font-weight: bold;
     display: flex;
     justify-content: flex-end; 
-    color: #f5f3f0;/* Align user message to the right */
+    color: #303030;/* Align user message to the right */
 }
  
 .bot-wrapper {
