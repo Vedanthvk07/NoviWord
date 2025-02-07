@@ -148,16 +148,16 @@ async function displayChatMessage(question, response, role,directLine) {
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table has been generated in document</div>`;      
         if(speechFlag){
           ensureVoicesLoaded(() => {
-            speakText("Table has been replaced in document");
+            speakText("Table has been generated in document");
         });
        
         speechFlag = false;  
         }}
         else{
-          chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">No table has been selected in the document</div>`;      
+          chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table has been generated in document</div>`;      
         if(speechFlag){
           ensureVoicesLoaded(() => {
-            speakText("No table has been selected in the document");
+            speakText("Table has been generated in document");
         });
        
         speechFlag = false;  
@@ -245,14 +245,14 @@ async function insertResponseIntoDocument(response) {
 async function insertResponseIntoDocumentAtCursor(response, insertAt) {
   if (insertAt === "end") {
     console.log("end of doc table");
-    await Word.run(async (context) => {
+    return await Word.run(async (context) => {
       const body = context.document.body;
       body.insertHtml(response, Word.InsertLocation.end);
       await context.sync();
       return true;
     });
   } else {
-    await Word.run(async (context) => {
+    return await Word.run(async (context) => {
       const selection = context.document.getSelection();
       selection.load("parentTable");
       await context.sync();
