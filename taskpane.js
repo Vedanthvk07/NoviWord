@@ -5,7 +5,7 @@
 
 
 //const { split } = require("core-js/fn/symbol");
-let speechFlag = false;
+//let speechFlag = false;
 let popup=null;
 
 Office.onReady(async function (info) {
@@ -53,13 +53,13 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
   // Open a pop-up window to handle the speech
  console.log("popup:",popup);
  console.log("spFlag",speechFlag);
-  if(popup || speechFlag){
+  if(speechFlag){
     popup.close();
     mic.classList.toggle("recording");
   }
   else{
   mic.classList.toggle("recording");
-  popup = window.open('speech.html', 'SpeechRecognition', 'width=1,height=1');
+  const popup = window.open('speech.html', 'SpeechRecognition', 'width=1,height=1');
   speechFlag = true;
   // Listen for messages from the pop-up window
   window.addEventListener("message", async function eventHandler(event){
