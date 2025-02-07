@@ -254,24 +254,35 @@ async function insertResponseIntoDocumentAtCursor(response, insertAt) {
       const selection = context.document.getSelection();
       selection.load("parentTable");
       await context.sync();
-      if (selection.parentTable) {
-        const table = selection.parentTable;
-        const tableRange = table.getRange(Word.RangeLocation.entire); 
-        console.log(tableRange)// Get range before deletion
-        tableRange.load();
-        await context.sync();
-
-        // table.delete(); // Delete the old table
-        // await context.sync();
-
-        tableRange.insertHtml(response, Word.InsertLocation.replace); // Insert new HTML at same place
-        await context.sync();
-      } else {
-        console.log("No table selected.");
+  
+      if (!selection.parentTable) {
+          console.log("❌ No table selected.");
+          return;
       }
-    });
-  }
-}
+  
+      const table = selection.parentTable;
+      const tableRange = table.getRange(Word.RangeLocation.entire); // Capture range before deletion
+      tableRange.load(); 
+      await context.sync();
+  
+      console.log("✅ Table found. Deleting...");
+      
+      // Insert a placeholder before deleting (to keep a valid reference)
+      const placeholder = tableRange.insertText(" ", Word.InsertLocation.before);
+      placeholder.load("text, address"); // Load placeholder info
+      await context.sync();
+  
+      table.delete(); // Delete the table
+      await context.sync();
+      console.log("✅ Table deleted.");
+  
+      console.log("✅ Inserting new table...");
+      placeholder.insertHtml(response, Word.InsertLocation.replace); // Insert new content
+      await context.sync();
+  
+      console.log("✅ New table inserted.");
+  });
+  }}
 
 const initializeDirectLine = async function () {
   try {
