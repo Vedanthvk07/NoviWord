@@ -3,6 +3,7 @@
 
 
 
+
 //const { split } = require("core-js/fn/symbol");
 let speechFlag = false;
 
@@ -49,6 +50,12 @@ document.getElementById("insertButton").onclick = async function () {
 
 document.getElementById('startSpeechButton').addEventListener('click', function () {
   // Open a pop-up window to handle the speech
+
+  if(popup || speechFlag){
+    popup.close();
+    mic.classList.toggle("recording");
+  }
+  else{
   mic.classList.toggle("recording");
   const popup = window.open('speech.html', 'SpeechRecognition', 'width=1,height=1');
   speechFlag = true;
@@ -72,6 +79,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
       mic.classList.toggle("recording");
       window.removeEventListener("message", eventHandler);
   }, { once: true });
+}
 });
 
 }
