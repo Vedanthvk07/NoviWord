@@ -6,6 +6,7 @@
 
 //const { split } = require("core-js/fn/symbol");
 let speechFlag = false;
+let popup=null;
 
 Office.onReady(async function (info) {
   displayStartingMessage("Hi! I'm NoviWord, your Word assistant bot. I can help you create documents, modify content, and insert useful information seamlessly. How can I assist you today?");
@@ -50,14 +51,15 @@ document.getElementById("insertButton").onclick = async function () {
 
 document.getElementById('startSpeechButton').addEventListener('click', function () {
   // Open a pop-up window to handle the speech
-
+ console.log("popup:",popup);
+ console.log("spFlag",speechFlag);
   if(popup || speechFlag){
     popup.close();
     mic.classList.toggle("recording");
   }
   else{
   mic.classList.toggle("recording");
-  const popup = window.open('speech.html', 'SpeechRecognition', 'width=1,height=1');
+  popup = window.open('speech.html', 'SpeechRecognition', 'width=1,height=1');
   speechFlag = true;
   // Listen for messages from the pop-up window
   window.addEventListener("message", async function eventHandler(event){
