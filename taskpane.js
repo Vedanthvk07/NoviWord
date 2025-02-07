@@ -154,10 +154,10 @@ async function displayChatMessage(question, response, role,directLine) {
         speechFlag = false;  
         }}
         else{
-          chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">Table has been generated in document</div>`;      
+          chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">No table is selected in the document</div>`;      
         if(speechFlag){
           ensureVoicesLoaded(() => {
-            speakText("Table has been generated in document");
+            speakText("No table is selected in the document");
         });
        
         speechFlag = false;  
