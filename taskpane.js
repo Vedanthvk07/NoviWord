@@ -51,7 +51,7 @@ document.getElementById("insertButton").onclick = async function () {
 
 document.getElementById('startSpeechButton').addEventListener('click', function () {
   // Open a pop-up window to handle the speech
- console.log("popup:",popup);
+ //console.log("popup:",popup);
  console.log("spFlag",speechFlag);
   if(speechFlag){
     popup.close();
