@@ -159,7 +159,7 @@ header h1 {
     display: none;
     padding: 5px;
     border-radius: 8px;
-    background-color: #737374;
+    background-color: #424246;
     color: white;
     border: none;
     cursor: pointer;
@@ -168,7 +168,7 @@ header h1 {
 }
  
 #insertButton:hover{
-    background-color: #d5d5d8;
+    background-color: #87878a;
     color: rgb(88, 88, 88);
 }
  
