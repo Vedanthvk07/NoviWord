@@ -86,6 +86,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
     if (question) {
         document.getElementById("userInput").value ="";
         displayChatMessage(question, '', "User");
+        //disable mic
         await getBotResponse(directLine1, question);
       }
       popup.close();
@@ -471,12 +472,14 @@ async function speakText(text) {
     speech.onend = () => {
       console.log("Speech has finished.");
       speechFlag=false;
+      // enable mic
       resolve(true); 
     };
 
     speech.onerror = (event) => {
       console.error("Speech error:", event.error);
       speechFlag=false;
+      // enable mic
       resolve(false); 
     };
 
