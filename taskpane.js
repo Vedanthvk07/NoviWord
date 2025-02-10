@@ -55,7 +55,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
  console.log("spFlag",speechFlag);
   if(speechFlag){
     mic.classList.toggle("recording");
-    speechFlag=false;
+    //speechFlag=false;
     try{
       popup.close();
     }
@@ -89,6 +89,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
         await getBotResponse(directLine1, question);
       }
       popup.close();
+      
       mic.classList.toggle("recording");
       window.removeEventListener("message", eventHandler);
   }, { once: true });
