@@ -69,7 +69,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
   const popup = window.open(
     'speech.html',
     'SpeechRecognition',
-    'width=1,height=1,top=-10000,left=-10000'
+    'width=1,height=1'
   );
   speechFlag = true;
   // Listen for messages from the pop-up window
