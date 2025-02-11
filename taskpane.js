@@ -112,6 +112,7 @@ function displayStartingMessage(starter) {
 // Display user question and bot response in chat window
 async function displayChatMessage(question, response, role,directLine) {
   const chatWindow = document.getElementById("chatWindow");
+  console.log("displayfunction called");
 
   // Check if response is valid and if attachments exist
   // eslint-disable-next-line no-constant-condition
@@ -236,6 +237,7 @@ async function displayChatMessage(question, response, role,directLine) {
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviWord</div><div class="message bot">${response.text}</div>`;
         document.getElementById("insertButton").style.display = "block";
         if(speechFlag){
+          console.log("speaking bot message");
           ensureVoicesLoaded(() => {
             speakText(response.text);
         });
