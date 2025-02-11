@@ -86,7 +86,8 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
     if (question) {
         document.getElementById("userInput").value ="";
         displayChatMessage(question, '', "User");
-        //disable mic
+        const micButton=document.getElementById("startSpeechButton")//disable mic
+        micButton.disabled=true;
         await getBotResponse(directLine1, question);
       }
       popup.close();
@@ -473,6 +474,9 @@ async function speakText(text) {
       console.log("Speech has finished.");
       speechFlag=false;
       // enable mic
+      const micButton=document.getElementById("startSpeechButton")//disable mic
+      micButton.disabled=false;
+      console.log("mic enabled");
       resolve(true); 
     };
 
@@ -480,6 +484,9 @@ async function speakText(text) {
       console.error("Speech error:", event.error);
       speechFlag=false;
       // enable mic
+      const micButton=document.getElementById("startSpeechButton")//disable mic
+      micButton.disabled=false;
+      console.log("mic enabled");
       resolve(false); 
     };
 
