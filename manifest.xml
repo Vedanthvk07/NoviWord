@@ -4,7 +4,7 @@
   <Version>1.0.0.0</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="NoviWord"/>
+  <DisplayName DefaultValue="NoviPilot"/>
   <Description DefaultValue="A template to get started."/>
   <IconUrl DefaultValue="https://vedanthvk07.github.io/NoviWord/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://vedanthvk07.github.io/NoviWord/assets/icon-64.png"/>
@@ -13,7 +13,7 @@
     <AppDomain>https://vedanthvk07.github.io</AppDomain>
   </AppDomains>
   <Hosts>
-    <Host Name="Word"/>
+    <Host Name="Document"/>
   </Hosts>
   <DefaultSettings>
     <SourceLocation DefaultValue="https://vedanthvk07.github.io/NoviWord/index.html"/>
@@ -21,7 +21,7 @@
   <Permissions>ReadWriteDocument</Permissions>
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
     <Hosts>
-      <Host xsi:type="Word">
+      <Host xsi:type="Document">
         <DesktopFormFactor>
           <GetStarted>
             <Title resid="GetStarted.Title"/>
@@ -72,13 +72,13 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://vedanthvk07.github.io/NoviWord/index.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="NoviWord has been added to assist you"/>
-        <bt:String id="CommandsGroup.Label" DefaultValue="NoviWord"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Open NoviWord"/>
+        <bt:String id="GetStarted.Title" DefaultValue="NoviPilot has been added to assist you"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="NoviPilot"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Open NoviPilot"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded successfully. Go to the HOME tab and click the 'Show Task Pane' button to get started."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+        <bt:String id="GetStarted.Description" DefaultValue="Your add-in loaded successfully. Go to the HOME tab and click the 'Show Task Pane' button to get started."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show NoviPilot"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
