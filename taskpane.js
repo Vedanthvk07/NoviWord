@@ -55,7 +55,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
  console.log("spFlag",speechFlag);
   if(speechFlag){
     mic.classList.toggle("recording");
-    //speechFlag=false;
+    speechFlag=false;
     try{
       popup.close();
     }
