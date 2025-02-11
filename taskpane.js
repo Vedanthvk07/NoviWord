@@ -234,8 +234,9 @@ async function displayChatMessage(question, response, role,directLine) {
       else if(response.speak==="interim"){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
         if(speechFlag){
-          ensureVoicesLoaded(() => {
-            speakText(response.text);
+          ensureVoicesLoaded(async () => {
+            await speakText(response.text);
+            speechFlag=true;
         });
        
         }      
