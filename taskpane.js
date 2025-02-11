@@ -81,6 +81,13 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
  
       // Insert recognized text into user input
       console.log(transcript);
+      if(transcript==="NoSpeech"){
+        popup.close();
+        speechFlag=false;
+        mic.classList.toggle("recording");
+        window.removeEventListener("message", eventHandler);
+      }
+      else{
       document.getElementById("userInput").value = transcript;
       var question = document.getElementById("userInput").value  ;
     if (question) {
@@ -94,7 +101,8 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
       
       mic.classList.toggle("recording");
       window.removeEventListener("message", eventHandler);
-  }, { once: true });
+  }}, { once: true });
+
 }
 });
 

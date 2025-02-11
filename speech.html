@@ -41,12 +41,13 @@
 
         recognition.onerror = function (event) {
             console.error("Error in speech recognition: ", event.error);
+            window.opener.postMessage("NoSpeech", window.location.origin);
             
         };
 
         recognition.onend = function () {
             console.log("Speech recognition ended.");
-            recognition=null; 
+            recognition.stop();
         };
 
         // Start speech recognition when the pop-up is opened
