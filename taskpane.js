@@ -6,7 +6,7 @@
 
 //const { split } = require("core-js/fn/symbol");
 let speechFlag = false;
-//let popup=null;
+let popup=null;
 
 Office.onReady(async function (info) {
   displayStartingMessage("Hi! I'm NoviPilot, your Word assistant bot. I can help you create documents, modify content, and insert useful information seamlessly. How can I assist you today?");
@@ -66,7 +66,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
   }
   else{
   mic.classList.toggle("recording");
-  const popup = window.open(
+  popup = window.open(
     'speech.html',
     'SpeechRecognition',
     'width=1,height=1'
