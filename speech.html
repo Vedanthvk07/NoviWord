@@ -51,6 +51,11 @@
 
         // Start speech recognition when the pop-up is opened
         recognition.start();
+
+        window.onbeforeunload = function () {
+            console.log("Popup is closing, stopping recognition.");
+            recognition.stop();
+        };
     
     
     </script>
