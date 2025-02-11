@@ -241,6 +241,16 @@ async function displayChatMessage(question, response, role,directLine) {
        
         }      
       }
+      else if(response.speak==="interimFinal"){
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
+        if(speechFlag){
+          ensureVoicesLoaded(async () => {
+            speakText(response.text);
+            
+        });
+       
+        }      
+      }
     
       else if(response.text){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
