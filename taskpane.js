@@ -113,7 +113,7 @@ async function displayChatMessage(question, response, role,directLine) {
  
   // Check if response is valid and if attachments exist
   // eslint-disable-next-line no-constant-condition
-  if (response && response.attachments && response.attachments.length > 0 ) {
+  if (response && response.attachments && response.attachments.length > 0 && false ) {
     response.attachments.forEach((attachment) => {
       // Check if attachment content has 'buttons' and 'signin' type
       if (attachment.content && attachment.content.buttons && attachment.content.buttons.length > 0) {
