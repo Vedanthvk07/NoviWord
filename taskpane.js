@@ -102,7 +102,7 @@ document.getElementById('startSpeechButton').addEventListener('click', function 
 });
  
 function displayStartingMessage(starter) {
-  chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">${starter}</div>`;
+  chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${starter}</div>`;
 }
  
  
@@ -130,7 +130,7 @@ async function displayChatMessage(question, response, role,directLine) {
             };
  
             // Display the bot's message
-            chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">${attachment.content.text}</div>`;
+            chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${attachment.content.text}</div>`;
             chatWindow.appendChild(signinButton); // Add the button after the message
           }
         });
@@ -142,7 +142,7 @@ async function displayChatMessage(question, response, role,directLine) {
       if(response.speak==="Generate"){
  
         insertResponseIntoDocument(response.text);
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">SOW content generated in document</div>`;
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">SOW content generated in document</div>`;
         if(speechFlag){
           ensureVoicesLoaded(() => {
             speakText("S.O.W. content generated in document");
@@ -153,7 +153,7 @@ async function displayChatMessage(question, response, role,directLine) {
       }else if(response.speak==="Table"){
  
         insertResponseIntoDocumentAtCursor(response.text, "end");
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">Table has been generated in document</div>`;      
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">Table has been generated in document</div>`;      
         if(speechFlag){
           ensureVoicesLoaded(() => {
             speakText("Table has been generated in document");
@@ -167,7 +167,7 @@ async function displayChatMessage(question, response, role,directLine) {
         statusflag=await insertResponseIntoDocumentAtCursor(response.text,"replace");
         console.log(statusflag);
         if(statusflag){
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">Table has been generated in document</div>`;      
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">Table has been generated in document</div>`;      
         if(speechFlag){
           ensureVoicesLoaded(() => {
             speakText("Table has been generated in document");
@@ -176,7 +176,7 @@ async function displayChatMessage(question, response, role,directLine) {
         //speechFlag = false;  
         }}
         else{
-          chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">No table is selected in the document</div>`;      
+          chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">No table is selected in the document</div>`;      
         if(speechFlag){
           ensureVoicesLoaded(() => {
             speakText("No table is selected in the document");
@@ -190,7 +190,7 @@ async function displayChatMessage(question, response, role,directLine) {
         splitText=response.text
         textArray=splitText.split("|");
         replaceText(textArray[0],textArray[1]);
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">Replaced ${textArray[0]} with ${textArray[1]} </div>`;      
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">Replaced ${textArray[0]} with ${textArray[1]} </div>`;      
         if(speechFlag){
           ensureVoicesLoaded(() => {
             speakText(`Replaced ${textArray[0]} with ${textArray[1]}`);
@@ -211,7 +211,7 @@ async function displayChatMessage(question, response, role,directLine) {
       }
       else if(response.speak==="paragraph"){
         setSelectedText(response.text);
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">Requested changes have been made in the document</div>`;  
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">Requested changes have been made in the document</div>`;  
         if(speechFlag){
           ensureVoicesLoaded(() => {
             speakText("Requested changes have been made in the document");
@@ -221,7 +221,7 @@ async function displayChatMessage(question, response, role,directLine) {
         }
       }
       else if(response.speak==="interim"){
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
         console.log("Calling loading function");
         displayLoading();
         if(speechFlag){
@@ -233,7 +233,7 @@ async function displayChatMessage(question, response, role,directLine) {
         }      
       }
       else if(response.speak==="interimFinal"){
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
         if(speechFlag){
           ensureVoicesLoaded(async () => {
             speakText(response.text);
@@ -244,7 +244,7 @@ async function displayChatMessage(question, response, role,directLine) {
       }
    
       else if(response.text){
-        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
+        chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
         document.getElementById("insertButton").style.display = "block";
         if(speechFlag){
           console.log("speaking bot message");
@@ -530,7 +530,7 @@ function displayLoading(){
     let loadingElement = document.getElementById("chatWindow");
     let loadingDots = [ ".", "..", "..."];
     let dotIndex = 1;
-    loadingElement.innerHTML += `<div id="loader-container" class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div id = "loader" class="message bot">.</div>`;
+    loadingElement.innerHTML += `<div id="loader-container" class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div id = "loader" class="message bot">.</div>`;
     
     let loader = document.getElementById("loader");
     setInterval(() => {
