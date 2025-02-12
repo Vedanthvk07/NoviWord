@@ -6,7 +6,7 @@ let popup=null;
 let loader=true;
  
 Office.onReady(async function (info) {
-  displayStartingMessage("Hi! I'm NoviPilot, your Word assistant bot. I can help you create documents, modify content, and insert useful information seamlessly. How can I assist you today?");
+  displayStartingMessage("Hi! I'm NoviPilot, your personal Copilot agent. I can help you create documents, modify content, and insert useful information seamlessly. How can I assist you today?");
   let directLine1 = await initializeDirectLine();
 if (info.host === Office.HostType.Word) {
  
@@ -232,6 +232,17 @@ async function displayChatMessage(question, response, role,directLine) {
        
         }      
       }
+      else if(response.speak==="interimSpeak"){
+        console.log("Calling loading function");
+        displayLoading();
+        if(speechFlag){
+          ensureVoicesLoaded(async () => {
+            await speakText(response.text);
+            speechFlag=true;
+        });
+       
+        }      
+      }
       else if(response.speak==="interimFinal"){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
         if(speechFlag){
@@ -354,7 +365,7 @@ const initializeDirectLine = async function () {
  
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Bot Response: ", activity.text);
-        if(response.speak!=="Selected"){
+        if(response.speak!=="Selected" ){
           try{
             document.getElementById("loader-container").remove();
             document.getElementById("loader").remove();
