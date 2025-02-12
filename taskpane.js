@@ -3,6 +3,7 @@
  
 let speechFlag = false;
 let popup=null;
+let loader=true;
  
 Office.onReady(async function (info) {
   displayStartingMessage("Hi! I'm NoviPilot, your Word assistant bot. I can help you create documents, modify content, and insert useful information seamlessly. How can I assist you today?");
@@ -221,6 +222,8 @@ async function displayChatMessage(question, response, role,directLine) {
       }
       else if(response.speak==="interim"){
         chatWindow.innerHTML += `<div class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div class="message bot">${response.text}</div>`;
+        console.log("Calling loading function");
+        displayLoading();
         if(speechFlag){
           ensureVoicesLoaded(async () => {
             await speakText(response.text);
@@ -351,12 +354,17 @@ const initializeDirectLine = async function () {
  
       if (activity.type === "message" && activity.from.id !== "10" && !activity.recipient) {
         console.log("Bot Response: ", activity.text);
-        try{
-          document.getElementById("loader-container").remove();
-          document.getElementById("loader").remove();
-        }catch{
-          console.log("could not find the element");
-        }
+        if(response.speak!=="Selected"){
+          try{
+            document.getElementById("loader-container").remove();
+            document.getElementById("loader").remove();
+          }catch{
+            console.log("could not find the element");
+          }
+          loader=false;
+      }else{
+        loader=true;
+      }
         displayChatMessage(false, activity, activity.from.role,directLine);
       }
     });
@@ -518,14 +526,16 @@ function ensureVoicesLoaded(callback) {
  
  
 function displayLoading(){
-let loadingElement = document.getElementById("chatWindow");
-let loadingDots = [ ".", "..", "..."];
-let dotIndex = 1;
-loadingElement.innerHTML += `<div id="loader-container" class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div id = "loader" class="message bot">.</div>`;
- 
-let loader = document.getElementById("loader");
-setInterval(() => {
-  loader.innerText =loadingDots[dotIndex];
-    dotIndex = (dotIndex + 1) % loadingDots.length;
-}, 500);
+  if(loader){
+    let loadingElement = document.getElementById("chatWindow");
+    let loadingDots = [ ".", "..", "..."];
+    let dotIndex = 1;
+    loadingElement.innerHTML += `<div id="loader-container" class="bot-wrapper"><img width=20 height=20 src="../../assets/copilot.png"/> NoviPilot</div><div id = "loader" class="message bot">.</div>`;
+    
+    let loader = document.getElementById("loader");
+    setInterval(() => {
+      loader.innerText =loadingDots[dotIndex];
+        dotIndex = (dotIndex + 1) % loadingDots.length;
+    }, 500);
+ }
 }
