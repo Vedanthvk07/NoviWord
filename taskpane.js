@@ -361,9 +361,9 @@ const initializeDirectLine = async function () {
           }catch{
             console.log("could not find the element");
           }
-          loader=false;
+          loader=true;
       }else{
-        loader=true;
+        loader=false;
       }
         displayChatMessage(false, activity, activity.from.role,directLine);
       }
