@@ -1,0 +1,254 @@
+/* Basic styling for the chat window */
+.chat-window {
+    /* overflow-y: scroll; */
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* Hide scrollbar in Edge/IE */
+    scrollbar-width: none;  /* Hide scrollbar in Firefox */
+    height: 300px;
+    /* border: 1px solid #ccc; */
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+ 
+body{
+    
+    background: #f0f0f0;
+ 
+}
+.chat-window::-webkit-scrollbar {
+    display: none;  /* Hide scrollbar in Chrome, Safari */
+}
+/* Input field styling */
+.input-field {
+    width: 80%;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: rgb(250, 250 ,250);
+    color: black;
+}
+ 
+/* Button styling */
+button {
+    margin-top: 10px;
+}
+ 
+/* Chat window message styling */
+.chat-window div {
+    margin-bottom: 8px;
+}
+ 
+/* User and bot message differentiation */
+.chat-window .user {
+    text-align: right;
+}
+ 
+.chat-window .bot {
+    font-style: italic;
+}
+ 
+/* Optional: Add some space for the header */
+header {
+    padding: 5px;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+}
+ 
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+ 
+ 
+.bot img {
+    max-width: 20px;
+    max-height: 20px;
+}
+ 
+.chat-window-main {
+    margin: auto;
+    background: rgb(255 255 255);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+ 
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.user-wrapper {
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end; 
+    color: #303030;/* Align user message to the right */
+}
+ 
+.bot-wrapper {
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start; /* Align bot message to the left */
+    color: #17155f;
+}
+.message {
+    max-width: 70%; /* Prevents divs from becoming too wide */
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 12px;
+    display: inline-block;
+    word-wrap: break-word;
+}
+#headerId h3{
+    margin: 0 0 10px 0;
+}
+ 
+.user {
+    background-color: #185abd;
+    color: white;
+    align-self: flex-end;
+}
+ 
+.bot {
+    background-color: rgb(240 240 240);
+    color: rgb(8, 8, 8);
+    align-self: flex-start;
+}
+ 
+ button {
+    border-radius: 8px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+ 
+ 
+ 
+  /* Input container for rounded input field with inline icons */
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+ 
+.input-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 75%;
+    font-size: 14px;
+}
+ 
+/* Icon buttons for send and voice input */
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+ 
+/* Hide Insert button initially */
+#insertButton {
+    display: none;
+    padding: 7px 15px;
+    border-radius: 8px;
+    background-color: #185abd;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+}
+ 
+#insertButton:hover{
+    background-color: #87878a;
+    color: rgb(88, 88, 88);
+}
+ 
+.icon-button svg {
+    stroke: #17155f; /* Default black color */
+    transition: stroke 0.3s ease; /* Smooth color transition */
+}
+ 
+/* Hover effect - makes the icon color lighter */
+.icon-button:hover svg {
+    stroke: #7f7eb3; /* Lighter gray color on hover */
+}
+ 
+#sendButton{
+    margin-bottom: 10px;
+}
+ 
+#startSpeechButton{
+    margin-bottom: 15px;
+}
+ 
+.mic {
+    transition: transform 0.2s ease-in-out;
+}
+ 
+.recording {
+    animation: pulse 1.2s infinite ease-in-out;
+}
+ 
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+ 
+.header-img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%; /* Makes the image circular */
+    border: 2px solid #ccc; /* Optional: Adds a border */
+  }
+
+  button:disabled svg {
+    opacity: 0.5; /* Lighten the color */
+    pointer-events: none; /* Prevent hover effect */
+  }
+  
+  button:disabled {
+    cursor: not-allowed; /* Keeps the pointer from changing */
+  }
+
+  .bot-message, .user-message {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    max-width: 80%;
+  }
+  
+  .bot-message {
+    background-color: #f1f1f1;
+    align-self: flex-start;
+  }
+  
+  .user-message {
+    background-color: #0078d4;
+    color: white;
+    align-self: flex-end;
+  }
+  
+  .message-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
